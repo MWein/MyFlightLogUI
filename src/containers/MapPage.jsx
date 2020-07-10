@@ -9,9 +9,6 @@ const MapPage = () => {
   const [ text, setText ] = useState('Hi')
   const [ map, setMap ] = useState()
 
-  console.log('You shouldnt fucking see me')
-
-
   useEffect(() => {
     if (!map) {
       const newMap = new Map({
