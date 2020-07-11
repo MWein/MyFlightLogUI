@@ -1,9 +1,9 @@
 import React from 'react'
 import Paper from '@material-ui/core/Paper'
+import ImageViewer from './ImageViewer'
 
 
-const FlightDetails = ({ planePic }) => {
-
+const FlightDetails = ({ planePic, pictures }) => {
 
 
   return (
@@ -13,20 +13,19 @@ const FlightDetails = ({ planePic }) => {
       </div>
 
 
-      <Paper style={{ overflow: 'hidden', height: '200px', marginTop: '10px', display: 'flex', alignItems: 'center' }}>
-          {
-            planePic ?
-              <center>
-                <img src={planePic} style={{ maxWidth: '100%', maxHeight: '100%' }} />
-              </center> :
-              <div style={{ textAlign: 'center', width: '100%' }}>- No Image -</div>
-          }
-      </Paper>
+      {/* <Paper style={{ height: '200px', marginTop: '10px', display: 'flex', alignItems: 'center' }}>
+        {
+          planePic ?
+            <img src={planePic} style={{ display: 'block', marginLeft: 'auto', marginRight: 'auto', maxWidth: '100%', maxHeight: '200px' }} /> :
+            <div style={{ textAlign: 'center', width: '100%' }}>- No Image -</div>
+        }
+      </Paper> */}
 
 
-      <div style={{ background: 'green', height: '200px', marginTop: '10px' }}>
-        Pictures if any
-      </div>
+      <ImageViewer images={[ planePic ]} />
+
+      <ImageViewer images={pictures} />
+
     </Paper>
   )
 }
