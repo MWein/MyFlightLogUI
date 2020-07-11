@@ -44,6 +44,24 @@ const useStyles = makeStyles({
 const LogTable = ({ logs, selectedFlight, setSelectedFlight }) => {
   const classes = useStyles()
 
+  const stopStyle = (index, stops) => {
+    const getTextAlign = () => {
+      if (index === 0) {
+        return 'left'
+      } else if (index === stops.length - 1) {
+        return 'right'
+      }
+      return 'center'
+    }
+
+    return {
+      flex: 1,
+      marginRight: index === stops.length - 1 ? '0px' : '10px',
+      textAlign: getTextAlign(),
+    }
+  }
+
+
   return (
     <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="customized table">
@@ -52,8 +70,11 @@ const LogTable = ({ logs, selectedFlight, setSelectedFlight }) => {
               <StyledTableCell width='75px'>Date</StyledTableCell>
               <StyledTableCell align="left" width='15px'>Type</StyledTableCell>
               <StyledTableCell align="left" width='15px'>Ident</StyledTableCell>
-              <StyledTableCell align="left" width='15px'>From</StyledTableCell>
-              <StyledTableCell align="left" width='15px'>To</StyledTableCell>
+
+              <StyledTableCell align="left" width='1px'>From</StyledTableCell>
+              <StyledTableCell align="left" width='1px'></StyledTableCell>
+              <StyledTableCell align="left" width='1px'>To</StyledTableCell>
+
               <StyledTableCell align="left" width='15px'>Night</StyledTableCell>
               <StyledTableCell align="left" width='95px'>Cross Country</StyledTableCell>
               <StyledTableCell align="left" width='15px'>PIC</StyledTableCell>
@@ -69,8 +90,17 @@ const LogTable = ({ logs, selectedFlight, setSelectedFlight }) => {
                 </StyledTableCell>
                 <StyledTableCell align="left">{row.type}</StyledTableCell>
                 <StyledTableCell align="left">{row.ident}</StyledTableCell>
-                <StyledTableCell align="left">{row.from}</StyledTableCell>
-                <StyledTableCell align="left">{row.to}</StyledTableCell>
+
+                <StyledTableCell align="left" colspan={3}>
+                  <div style={{ display: 'flex', flexDirection: 'row' }}>
+                    {
+                      row.stops.map((x, index) =>
+                        <span style={stopStyle(index, row.stops)}>{x}</span>
+                      )
+                    }
+                  </div>
+                </StyledTableCell>
+
                 <StyledTableCell align="left">{row.night}</StyledTableCell>
                 <StyledTableCell align="left">{row.crossCountry}</StyledTableCell>
                 <StyledTableCell align="left">{row.pic}</StyledTableCell>
