@@ -91,11 +91,11 @@ const LogTable = ({ logs, selectedFlight, setSelectedFlight }) => {
                 <StyledTableCell align="left">{row.type}</StyledTableCell>
                 <StyledTableCell align="left">{row.ident}</StyledTableCell>
 
-                <StyledTableCell align="left" colspan={3}>
+                <StyledTableCell align="left" colSpan={3}>
                   <div style={{ display: 'flex', flexDirection: 'row' }}>
                     {
                       row.stops.map((x, index) =>
-                        <span style={stopStyle(index, row.stops)}>{x}</span>
+                        <span key={`${x}${index}`} style={stopStyle(index, row.stops)}>{x}</span>
                       )
                     }
                   </div>
