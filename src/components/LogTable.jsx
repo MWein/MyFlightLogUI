@@ -26,6 +26,9 @@ const StyledTableRow = withStyles((theme) => ({
     '&:nth-of-type(odd)': {
       backgroundColor: theme.palette.action.hover,
     },
+  highlight: {
+    backgroundColor: theme.palette.secondary.dark,
+  }
   },
 }))(TableRow)
 
@@ -38,7 +41,7 @@ const useStyles = makeStyles({
 
 
 
-const LogTable = ({ logs }) => {
+const LogTable = ({ logs, selectedFlight, setSelectedFlight }) => {
   const classes = useStyles()
 
   return (
@@ -60,7 +63,7 @@ const LogTable = ({ logs }) => {
           </TableHead>
           <TableBody>
             {logs.map((row) => (
-              <StyledTableRow key={row.id}>
+              <StyledTableRow hover selected={row.id === selectedFlight} onClick={() => setSelectedFlight(row.id)} key={row.id}>
                 <StyledTableCell component="th" scope="row">
                   {row.date}
                 </StyledTableCell>
