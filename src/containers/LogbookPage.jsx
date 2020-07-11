@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import TotalTimeTable from '../components/TotalTimeTable'
 import LogTable from '../components/LogTable'
+import FlightDetails from '../components/FlightDetails'
 
 
 const tempData = {
@@ -19,7 +20,7 @@ const tempData = {
       dual: 0.4,
       pic: 0,
       total: 0.4,
-      remarks: 'Intro Flight'
+      remarks: 'Intro Lesson'
     },
     {
       id: 1,
@@ -97,10 +98,11 @@ const LogbookPage = () => {
     <div style={{ height:'100%' }}>
       <TotalTimeTable totalTimes={totalTimes} />
 
-      <br />
+      <div style={{ display: 'inline-flex', marginTop: '20px', width: '100%' }}>
+        <LogTable logs={logs} />
+        <FlightDetails />
+      </div>
 
-      <LogTable logs={logs} />
-      
     </div>
   )
 }

@@ -8,7 +8,7 @@ import Container from '@material-ui/core/Container'
 const AppContainer = () => {
   return (
       <BrowserRouter>
-        <Container maxWidth={false} style={{ background: '#222222', padding: '25px', height: '100vh' }}>
+        <Container maxWidth={false} style={{ padding: '25px', height: '100vh' }}>
           <Route component={MapPage} exact path='/' />
           <Route component={LogbookPage} path='/logbook' />
         </Container>
