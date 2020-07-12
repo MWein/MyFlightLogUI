@@ -55,7 +55,7 @@ const ImageViewer = ({ images = [], onClick }) => {
     <Paper onMouseEnter={() => setShowNavButtons(true)} onMouseLeave={() => setShowNavButtons(false)} style={{ position: 'relative', height: '200px', marginTop: '10px', display: 'flex', alignItems: 'center' }}>
       {
         displayImages && displayImages.length > 0 ?
-          <img onClick={() => onClick(selectedImg)} src={displayImages[selectedImg]} style={{ display: 'block', marginLeft: 'auto', marginRight: 'auto', maxWidth: '100%', maxHeight: '200px' }} /> :
+          <img onClick={() => onClick(selectedImg)} src={displayImages[selectedImg]} style={{ display: 'block', marginLeft: 'auto', marginRight: 'auto', maxWidth: '100%', maxHeight: '200px', borderRadius: '4px' }} /> :
           <div style={{ textAlign: 'center', width: '100%' }}>- No Image -</div>
       }
 
