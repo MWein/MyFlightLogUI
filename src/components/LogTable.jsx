@@ -46,14 +46,8 @@ const LogTable = ({ logs, selectedFlight, setSelectedFlight }) => {
 
   const [ withPhotos, setWithPhotos ] = useState(false)
   const [ page, setPage ] = useState(0)
-  const [ rowsPerPage, setRowsPerPage ] = useState(10)
+  const [ rowsPerPage, setRowsPerPage ] = useState(25)
 
-
-  const handleChangeRowsPerPage = event => {
-    setPage(0)
-    setSelectedFlight(0)
-    setRowsPerPage(parseInt(event.target.value), 10)
-  }
 
   const handlePhotoFilterChange = event => {
     setPage(0)
@@ -137,13 +131,12 @@ const LogTable = ({ logs, selectedFlight, setSelectedFlight }) => {
       </TableContainer>
 
       <TablePagination
-        rowsPerPageOptions={[10, 20, 30]}
+        rowsPerPageOptions={[]}
         component="div"
         count={filteredSortedLogs.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onChangePage={(event, newPage) => setPage(newPage)}
-        onChangeRowsPerPage={handleChangeRowsPerPage}
       />
 
 
