@@ -45,6 +45,8 @@ const LogTable = ({ logs, selectedFlight, setSelectedFlight }) => {
   const classes = useStyles()
 
   const [ withPhotos, setWithPhotos ] = useState(false)
+  const [ withForeflighTrack, setWithForeflightTrack ] = useState(false)
+
   const [ page, setPage ] = useState(0)
   const [ rowsPerPage, setRowsPerPage ] = useState(25)
 
@@ -53,6 +55,12 @@ const LogTable = ({ logs, selectedFlight, setSelectedFlight }) => {
     setPage(0)
     setSelectedFlight(0)
     setWithPhotos(event.target.checked)
+  }
+
+  const handleForflightFilterChange = event => {
+    setPage(0)
+    setSelectedFlight(0)
+    setWithForeflightTrack(event.target.checked)
   }
 
 
@@ -75,7 +83,9 @@ const LogTable = ({ logs, selectedFlight, setSelectedFlight }) => {
 
 
 
-  const filteredSortedLogs = logs.filter(log => withPhotos ? log.pictures && log.pictures.length > 0 : true)
+  const filteredSortedLogs = logs
+    .filter(log => withPhotos ? log.pictures && log.pictures.length > 0 : true)
+    .filter(log => withForeflighTrack ? log.hasForeflightTrack : true)
 
 
 
@@ -151,6 +161,17 @@ const LogTable = ({ logs, selectedFlight, setSelectedFlight }) => {
             />
           }
           label="With Photos"
+        />
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={withForeflighTrack}
+              onChange={handleForflightFilterChange}
+              name="checkedF"
+              color='primary'
+            />
+          }
+          label="With Foreflight Track"
         />
       </div>
 
