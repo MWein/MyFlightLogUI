@@ -58,6 +58,11 @@ const FlightDetails = ({ foreflightTrack, geoLocation, planePic, pictures }) => 
 
   useEffect(() => {
     // No need for a conditional beyond this because state is not changed
+
+
+    // Intermediate variable for flight path
+
+
     if (vectorSource) {
       const convertedPositions = geoLocation.map(x => latlong2Meters(x[0], x[1]))
       vectorSource.clear()
