@@ -8,6 +8,8 @@ import TablePagination from '@material-ui/core/TablePagination'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import Checkbox from '@material-ui/core/Checkbox'
 
 
 
@@ -42,14 +44,21 @@ const useStyles = makeStyles({
 const LogTable = ({ logs, selectedFlight, setSelectedFlight }) => {
   const classes = useStyles()
 
-
+  const [ withPhotos, setWithPhotos ] = useState(false)
   const [ page, setPage ] = useState(0)
   const [ rowsPerPage, setRowsPerPage ] = useState(10)
 
 
   const handleChangeRowsPerPage = event => {
-    setRowsPerPage(parseInt(event.target.value), 10)
     setPage(0)
+    setSelectedFlight(0)
+    setRowsPerPage(parseInt(event.target.value), 10)
+  }
+
+  const handlePhotoFilterChange = event => {
+    setPage(0)
+    setSelectedFlight(0)
+    setWithPhotos(event.target.checked)
   }
 
 
@@ -71,8 +80,13 @@ const LogTable = ({ logs, selectedFlight, setSelectedFlight }) => {
   }
 
 
+
+  const filteredSortedLogs = logs.filter(log => withPhotos ? log.pictures && log.pictures.length > 0 : true)
+
+
+
   return (
-    <Paper style={{ flex: 1, height: 'min-content' }}>
+    <Paper style={{ flex: 1, height: 'min-content', position: 'relative' }}>
       <TableContainer>
         <Table className={classes.table} aria-label="customized table" size="small">
           <TableHead>
@@ -91,7 +105,7 @@ const LogTable = ({ logs, selectedFlight, setSelectedFlight }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {logs
+            {filteredSortedLogs
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => (
                 <StyledTableRow onClick={() => setSelectedFlight(row.id)} key={row.id} style={row.id === selectedFlight ? { background: '#80808080' } : {}}>
@@ -125,12 +139,29 @@ const LogTable = ({ logs, selectedFlight, setSelectedFlight }) => {
       <TablePagination
         rowsPerPageOptions={[10, 20, 30]}
         component="div"
-        count={logs.length}
+        count={filteredSortedLogs.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onChangePage={(event, newPage) => setPage(newPage)}
         onChangeRowsPerPage={handleChangeRowsPerPage}
       />
+
+
+      <div style={{ position: 'absolute', left: '15px', bottom: '5px' }}>
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={withPhotos}
+              onChange={handlePhotoFilterChange}
+              name="checkedF"
+              color='primary'
+            />
+          }
+          label="With Photos"
+        />
+      </div>
+
+      
     </Paper>
   )
 }
