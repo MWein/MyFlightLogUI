@@ -159,7 +159,7 @@ const FlightDetails = ({ foreflightTrack, geoLocation, planePic, pictures }) => 
       </Modal>
 
 
-      <div id='map' style={{ background: 'green', height: '200px' }} />
+      <div id='map' style={{ height: '200px' }} />
       <ImageViewer images={[ planePic ]} onClick={img => initiateModal(img, [ planePic ])} />
       <ImageViewer images={pictures} onClick={img => initiateModal(img, pictures)} />
     </Paper>

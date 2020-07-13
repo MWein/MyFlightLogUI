@@ -53,13 +53,13 @@ const LogTable = ({ logs, selectedFlight, setSelectedFlight }) => {
 
   const handlePhotoFilterChange = event => {
     setPage(0)
-    setSelectedFlight(0)
+    setSelectedFlight(null)
     setWithPhotos(event.target.checked)
   }
 
   const handleForflightFilterChange = event => {
     setPage(0)
-    setSelectedFlight(0)
+    setSelectedFlight(null)
     setWithForeflightTrack(event.target.checked)
   }
 

@@ -24,7 +24,7 @@ const LogbookPage = () => {
 
 
 
-  const [ selectedFlight, setSelectedFlight ] = useState(-1)
+  const [ selectedFlight, setSelectedFlight ] = useState(null)
 
 
 
@@ -47,9 +47,9 @@ const LogbookPage = () => {
 
 
 
-  const geoLocation = selectedFlight != -1 ? logs.find(x => x.id === selectedFlight).geolocation : []
-  const planePic = selectedFlight != -1 ? `http://localhost:8081/plane-image?ident=${logs.find(x => x.id === selectedFlight).ident}` : null
-  const pictures = selectedFlight != -1 ? logs.find(x => x.id === selectedFlight).pictures: []
+  const geoLocation = selectedFlight != null ? logs.find(x => x.id === selectedFlight).geolocation : []
+  const planePic = selectedFlight != null ? `http://localhost:8081/plane-image?ident=${logs.find(x => x.id === selectedFlight).ident}` : null
+  const pictures = selectedFlight != null ? logs.find(x => x.id === selectedFlight).pictures: []
 
 
 
