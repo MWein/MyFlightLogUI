@@ -64,7 +64,8 @@ const FlightDetails = ({ foreflightTrack, geoLocation, planePic, pictures }) => 
 
 
     if (vectorSource) {
-      const convertedPositions = geoLocation.map(x => latlong2Meters(x[0], x[1]))
+      //const convertedPositions = geoLocation.map(x => latlong2Meters(x[0], x[1]))
+      const convertedPositions = geoLocation
       vectorSource.clear()
 
       // Single Point
