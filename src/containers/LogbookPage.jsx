@@ -23,18 +23,17 @@ const LogbookPage = () => {
   })
 
 
-
   const [ selectedFlight, setSelectedFlight ] = useState(null)
-
+  const [ foreflightTrack, setForeflightTrack ] = useState([])
 
 
   const loadLogData = async () => {
     const response = await superagent.get('http://localhost:8081/log')
     const logData = JSON.parse(response.text)
 
+    setLoaded(true)
     setLogs(logData.logs)
     setTotalTimes(logData.totals)
-    setLoaded(true)
     setSelectedFlight(logData.logs[0].id)
   }
 
@@ -45,6 +44,27 @@ const LogbookPage = () => {
     }
   })
 
+
+  
+  const handleSetSelectedFlight = async flightId => {
+    setSelectedFlight(flightId)
+
+    if (flightId) {
+      const selectedFlightObj = logs.find(x => x.id === flightId)
+
+      if (selectedFlightObj.hasForeflightTrack) {
+        const response = await superagent.get(`http://localhost:8081/foreflight-track?flightid=${flightId}`)
+        const track = JSON.parse(response.text)
+
+        setForeflightTrack(track)
+      } else {
+        setForeflightTrack([])
+      }
+    } else {
+      setForeflightTrack([])
+    }
+  }
+  
 
 
   const geoLocation = selectedFlight != null ? logs.find(x => x.id === selectedFlight).geolocation : []
@@ -58,8 +78,8 @@ const LogbookPage = () => {
       <TotalTimeTable totalTimes={totalTimes} />
 
       <div style={{ display: 'inline-flex', marginTop: '20px', width: '100%' }}>
-        <LogTable logs={logs} selectedFlight={selectedFlight} setSelectedFlight={setSelectedFlight} />
-        <FlightDetails geoLocation={geoLocation} planePic={planePic} pictures={pictures} />
+        <LogTable logs={logs} selectedFlight={selectedFlight} setSelectedFlight={handleSetSelectedFlight} />
+        <FlightDetails geoLocation={geoLocation} planePic={planePic} pictures={pictures} foreflightTrack={foreflightTrack} />
       </div>
 
     </div>

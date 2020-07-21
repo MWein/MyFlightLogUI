@@ -27,7 +27,6 @@ const FlightDetails = ({ foreflightTrack, geoLocation, planePic, pictures }) => 
     return [x, y]
   }
 
-
   const [ map, setMap ] = useState()
   const [ vectorSource, setVectorSource ] = useState()
   const [ view, setView ] = useState()
@@ -59,18 +58,12 @@ const FlightDetails = ({ foreflightTrack, geoLocation, planePic, pictures }) => 
   useEffect(() => {
     // No need for a conditional beyond this because state is not changed
 
-
-    // Intermediate variable for flight path
-
-
     if (vectorSource) {
-      //const convertedPositions = geoLocation.map(x => latlong2Meters(x[0], x[1]))
-      const convertedPositions = geoLocation
       vectorSource.clear()
 
       // Single Point
-      if (uniq(convertedPositions.map(x => JSON.stringify(x))).length === 1) {
-        const firstPoint = convertedPositions[0]
+      if (uniq(geoLocation.map(x => JSON.stringify(x))).length === 1) {
+        const firstPoint = geoLocation[0]
         vectorSource.addFeature(new Feature(new Point(firstPoint)))
 
         const feature = vectorSource.getFeatures()[0]
@@ -80,11 +73,14 @@ const FlightDetails = ({ foreflightTrack, geoLocation, planePic, pictures }) => 
         view.centerOn(point.getCoordinates(), size, [size[0] / 2, size[1] / 2])
         view.setZoom(12)
       } else {
+        // Choose foreflight track over geolocation if available
+        const polygonTrack = foreflightTrack.length > 0 ? foreflightTrack : geoLocation
+
         // Add polygon
-        vectorSource.addFeature(new Feature(new LineString(convertedPositions)))
+        vectorSource.addFeature(new Feature(new LineString(polygonTrack)))
 
         // Add points, stringify to remove duplicates
-        uniq(convertedPositions.map(x => JSON.stringify(x))).map(x => JSON.parse(x)).map(x => {
+        uniq(geoLocation.map(x => JSON.stringify(x))).map(x => JSON.parse(x)).map(x => {
           vectorSource.addFeature(new Feature(new Point(x)))
         })
   
