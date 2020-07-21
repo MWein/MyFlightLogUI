@@ -28,4 +28,4 @@ RUN sed -i -e 's/404.html/index.html/g' /etc/nginx/conf.d/default.conf
 
 WORKDIR /usr/share/nginx/html
 
-COPY --from=0 /usr/src/app/dist/* .
+COPY --from=0 /usr/src/app/dist/* ./
