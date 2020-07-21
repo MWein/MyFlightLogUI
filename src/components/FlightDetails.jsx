@@ -62,7 +62,7 @@ const FlightDetails = ({ foreflightTrack, geoLocation, planePic, pictures }) => 
       vectorSource.clear()
 
       // Single Point
-      if (uniq(geoLocation.map(x => JSON.stringify(x))).length === 1 && foreflightTrack.length === []) {
+      if (uniq(geoLocation.map(x => JSON.stringify(x))).length === 1 && foreflightTrack.length === 0) {
         const firstPoint = geoLocation[0]
         vectorSource.addFeature(new Feature(new Point(firstPoint)))
 
