@@ -7,13 +7,14 @@ import superagent from 'superagent'
 import VectorSource from 'ol/source/Vector'
 import Point from 'ol/geom/Point'
 import { Icon, Style } from 'ol/style'
+import Overlay from 'ol/Overlay'
 
 import airportIcon from '../data/airportIcon.svg'
 
 
 
 const VisitedAirports = () => {
-  const [ map, setMap ] = useState()
+  const [ map, setMap ] = useState(null)
 
   const [ loaded, setLoaded ] = useState(false)
   const [ visitedAirports, setVisitedAirports ] = useState([])
@@ -57,16 +58,15 @@ const VisitedAirports = () => {
 
         const airportFeature = new Feature({
           geometry: new Point([x.lat, x.long]),
+          ident: x.ident,
           name: x.name,
-          // population: 4000,
-          // rainfall: 500
+          lastVisited: x.lastVisited
         })
 
         airportFeature.setStyle(iconStyle)
 
         vS.addFeature(airportFeature)
       })
-
 
       const view = new View({
         center: [0, 0],
@@ -86,7 +86,39 @@ const VisitedAirports = () => {
         view
       })
 
-      view.fit(vS.getExtent(), { padding: [ 70, 70, 70, 70 ] })
+      view.fit(vS.getExtent(), { padding: [ 170, 170, 170, 170 ] })
+
+
+      const element = document.getElementById('popup')
+      const popup = new Overlay({
+        element: element,
+        positioning: 'bottom-center',
+        stopEvent: false,
+        offset: [0, -50]
+      });
+      newMap.addOverlay(popup)
+
+
+      newMap.on('singleclick', event => {
+        const feature = newMap.forEachFeatureAtPixel(event.pixel, feature => feature)
+        if (feature) {
+          const content = document.getElementById('popup-content')
+
+          content.innerHTML = `<div>${feature.get('ident')} - ${feature.get('name')}</div><div style="margin-top: 5px;">Last Visited: ${feature.get('lastVisited')}</div>`
+
+          popup.setPosition(feature.getGeometry().getCoordinates())
+        } else {
+          popup.setPosition(undefined)
+        }
+      })
+
+
+      newMap.on('pointermove', event => {
+        const pixel = newMap.getEventPixel(event.originalEvent);
+        const hit = newMap.hasFeatureAtPixel(pixel);
+        document.getElementById('map').style.cursor = hit ? 'pointer' : null
+      });
+
 
       setMap(newMap)
     }
@@ -96,6 +128,9 @@ const VisitedAirports = () => {
   return (
     <div style={{ height: '100%' }}>
       <div id="map" />
+      <div id='popup' style={{ whiteSpace: 'nowrap', position: 'absolute', backgroundColor: 'white', boxShadow: '0 1px 4px rgba(0,0,0,0.2)', padding: '15px', borderRadius: '10px', border: '1px solid #cccccc', bottom: '12px', left: '-50px' }}>
+        <div id="popup-content"></div>
+      </div>
     </div>
   )
 }
