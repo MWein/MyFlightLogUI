@@ -28,7 +28,7 @@ const LogbookPage = () => {
 
 
   const loadLogData = async () => {
-    const response = await superagent.get('http://localhost:8081/log')
+    const response = await superagent.get(`${window.origin}:8081/log`)
     const logData = JSON.parse(response.text)
 
     setLoaded(true)
@@ -53,7 +53,7 @@ const LogbookPage = () => {
       const selectedFlightObj = logs.find(x => x.id === flightId)
 
       if (selectedFlightObj.hasForeflightTrack) {
-        const response = await superagent.get(`http://localhost:8081/foreflight-track?flightid=${flightId}`)
+        const response = await superagent.get(`${window.origin}:8081/foreflight-track?flightid=${flightId}`)
         const track = JSON.parse(response.text)
 
         setForeflightTrack(track)
