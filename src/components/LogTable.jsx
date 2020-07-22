@@ -48,7 +48,7 @@ const LogTable = ({ logs, selectedFlight, setSelectedFlight }) => {
   const [ withForeflighTrack, setWithForeflightTrack ] = useState(false)
 
   const [ page, setPage ] = useState(0)
-  const [ rowsPerPage, setRowsPerPage ] = useState(25)
+  const [ rowsPerPage, setRowsPerPage ] = useState(10)
 
 
   const handlePhotoFilterChange = event => {
