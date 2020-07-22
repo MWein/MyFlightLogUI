@@ -48,6 +48,7 @@ const LogbookPage = () => {
   
   const handleSetSelectedFlight = async flightId => {
     setSelectedFlight(flightId)
+    setForeflightTrack([])
 
     if (flightId) {
       const selectedFlightObj = logs.find(x => x.id === flightId)
