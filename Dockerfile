@@ -1,19 +1,22 @@
-FROM node:10
+#FROM node:10
 
 # Create app directory
-WORKDIR /usr/src/app
+#WORKDIR /usr/src/app
 
 # Install App Dependencies
-COPY package.json ./
+#COPY package.json ./
 
 # Install packages
-RUN npm install
+#RUN npm install
 
 # Bundle app source
-COPY . .
+#COPY . .
 
 # Build the distros
-RUN npm run build
+#RUN npm run build
+
+
+# Just going off the committed dist folder because building takes FAR too long in the Droplet
 
 
 FROM nginx:alpine
