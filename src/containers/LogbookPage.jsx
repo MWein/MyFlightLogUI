@@ -47,6 +47,11 @@ const LogbookPage = () => {
 
   
   const handleSetSelectedFlight = async flightId => {
+    // Do nothing if the selected flight ID is the one the user just selected
+    if (flightId === selectedFlight) {
+      return
+    }
+
     setSelectedFlight(flightId)
     setForeflightTrack([])
 
