@@ -8,7 +8,7 @@ import NavigateBefore from '@material-ui/icons/NavigateBefore'
 import NavigateNext from '@material-ui/icons/NavigateNext'
 
 import 'ol/ol.css'
-import {Map, View, Feature} from 'ol'
+import { Map, View, Feature } from 'ol'
 import { Tile as TileLayer, Vector as VectorLayer } from 'ol/layer'
 import { OSM } from 'ol/source'
 import VectorSource from 'ol/source/Vector'

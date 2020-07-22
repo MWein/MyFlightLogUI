@@ -56,7 +56,7 @@ const ImageViewer = ({ images = [], onClick }) => {
       {
         displayImages && displayImages.length > 0 ?
           <img onClick={() => onClick(selectedImg)} src={displayImages[selectedImg]} style={{ display: 'block', marginLeft: 'auto', marginRight: 'auto', maxWidth: '100%', maxHeight: '200px', borderRadius: '4px' }} /> :
-          <div style={{ textAlign: 'center', width: '100%' }}>- No Image -</div>
+          <div style={{ textAlign: 'center', width: '100%' }}>- No Images -</div>
       }
 
       <div onClick={() => cycleImage(selectedImg - 1)} style={{ visibility: leftNavButtonVisibility(), borderRadius: '4px', opacity: 0.7, background: 'black', position: 'absolute', width: '20px', height: '200px', display: 'flex', alignItems: 'center' }}>
