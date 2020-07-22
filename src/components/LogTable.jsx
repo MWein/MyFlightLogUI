@@ -92,7 +92,7 @@ const LogTable = ({ logs, selectedFlight, setSelectedFlight }) => {
   return (
     <Paper style={{ flex: 1, height: 'min-content', position: 'relative' }}>
       <TableContainer>
-        <Table className={classes.table} aria-label="customized table" size="small">
+        <Table className={classes.table} aria-label="customized table">
           <TableHead>
             <TableRow>
               <StyledTableCell width='75px'>Date</StyledTableCell>

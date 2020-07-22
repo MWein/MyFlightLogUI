@@ -43,7 +43,7 @@ const TotalTimeTable = ({ totalTimes }) => {
 
   return (
     <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="customized table" size='small'>
+      <Table className={classes.table} aria-label="customized table">
         <TableHead>
           <TableRow>
             <StyledTableCell align="left">Takeoffs</StyledTableCell>
