@@ -49,7 +49,7 @@ const NavBar = ({ history }) => {
         style={{ maxWidth: '750px' }}
       >
         {paths.map(path => {
-          return (<BottomNavigationAction label={path.label} icon={path.icon} onClick={() => history.push(path.link)} />)
+          return (<BottomNavigationAction label={path.label} icon={path.icon} onClick={() => path.link && history.push(path.link)} />)
         })}
       </BottomNavigation>
     </center>
