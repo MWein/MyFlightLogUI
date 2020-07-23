@@ -125,7 +125,7 @@ const FlightDetails = ({ foreflightTrack, geoLocation, planePic, pictures }) => 
 
 
   return (
-    <Paper style={{ height: 'min-content', width: '265px', marginLeft: '20px', padding: '10px' }}>
+    <Paper style={{ height: 'min-content', width: '265px', minWidth: '265px', marginLeft: '20px', padding: '10px' }}>
       <Modal open={displayModal} onClose={() => setDisplayModal(false)} BackdropComponent={Backdrop} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <Fade in={displayModal}>
           <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
