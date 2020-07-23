@@ -22,17 +22,17 @@ const NavBar = ({ history }) => {
       icon: <HistoryIcon />
     },
     {
-      label: 'Airplanes Flown',
+      label: 'Airplanes Flown (Coming Soon)',
       //link: '',
       icon: <FlightIcon />
     },
     {
-      label: 'RV14 Build Log',
+      label: 'RV14 Build Log (Coming Soon)',
       //link: '',
       icon: <BuildIcon />
     },
     {
-      label: 'About This Site',
+      label: 'About This Site (Coming Soon)',
       //link: '',
       icon: <DeveloperIcon />
     },
