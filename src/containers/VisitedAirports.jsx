@@ -8,12 +8,12 @@ import VectorSource from 'ol/source/Vector'
 import Point from 'ol/geom/Point'
 import { Icon, Style } from 'ol/style'
 import Overlay from 'ol/Overlay'
+import airportIcon from '../data/airportIcon.svg'
+
 
 // For sectional chart layer
 // import ImageLayer from 'ol/layer/Image'
 // import ImageWMS from 'ol/source/ImageWMS'
-
-import airportIcon from '../data/airportIcon.svg'
 
 
 
@@ -28,8 +28,6 @@ const VisitedAirports = () => {
   const loadAirports = async () => {
     const response = await superagent.get(`http://${window.location.hostname}:8081/visited-airports`)
     const airportData = JSON.parse(response.text)
-
-    console.log(airportData)
 
     setLoaded(true)
     setVisitedAirports(airportData)
