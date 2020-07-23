@@ -9,6 +9,10 @@ import Point from 'ol/geom/Point'
 import { Icon, Style } from 'ol/style'
 import Overlay from 'ol/Overlay'
 
+// For sectional chart layer
+// import ImageLayer from 'ol/layer/Image'
+// import ImageWMS from 'ol/source/ImageWMS'
+
 import airportIcon from '../data/airportIcon.svg'
 
 
@@ -79,6 +83,12 @@ const VisitedAirports = () => {
           new TileLayer({
             source: new OSM()
           }),
+          // new ImageLayer({
+          //   source: new ImageWMS({
+          //     url: 'http://wms.chartbundle.com/wms',
+          //     params: {'LAYERS': 'sec'},
+          //   })
+          // }),
           new VectorLayer({
             source: vS,
           }),
