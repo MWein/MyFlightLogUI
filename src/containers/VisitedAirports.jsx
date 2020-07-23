@@ -132,7 +132,7 @@ const VisitedAirports = () => {
 
 
   return (
-    <div style={{ height: '100%' }}>
+    <div style={{ height: 'calc(100% - 75px)' }}>
       <div id="map" />
       <div id='popup' style={{ whiteSpace: 'nowrap', position: 'absolute', backgroundColor: 'white', boxShadow: '0 1px 4px rgba(0,0,0,0.2)', padding: '15px', borderRadius: '10px', border: '1px solid #cccccc', bottom: '12px', left: '-50px' }}>
         <div id="popup-content"></div>

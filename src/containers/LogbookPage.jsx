@@ -80,7 +80,7 @@ const LogbookPage = () => {
 
 
   return (
-    <div style={{ height:'100%' }}>
+    <div>
       <TotalTimeTable totalTimes={totalTimes} />
 
       <div style={{ display: 'inline-flex', marginTop: '20px', width: '100%' }}>

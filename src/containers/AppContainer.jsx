@@ -10,11 +10,11 @@ import Container from '@material-ui/core/Container'
 const AppContainer = () => {
   return (
       <BrowserRouter>
-        <Container maxWidth={false} style={{ padding: '25px', height: 'calc(100vh - 50px)' }}>
+        <Container maxWidth={false} style={{ padding: '25px', height: '100vh' }}>
           <Route component={VisitedAirports} exact path='/' />
           <Route component={LogbookPage} path='/logbook' />
+          <NavBar />
         </Container>
-        <NavBar />
       </BrowserRouter>
   )
 }

@@ -21,7 +21,7 @@ const NavBar = ({ history }) => {
   }
 
   return (
-    <center style={{ position: 'absolute', width: '100%', bottom: '10px' }}>
+    <center style={{ width: '100%', marginTop: '20px', marginBottom: '20px' }}>
       <BottomNavigation
         value={value()}
         showLabels
