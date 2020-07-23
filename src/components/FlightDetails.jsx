@@ -15,6 +15,8 @@ import VectorSource from 'ol/source/Vector'
 import LineString from 'ol/geom/LineString'
 import Point from 'ol/geom/Point'
 
+import { Icon, Style } from 'ol/style'
+import airportIcon from '../data/airportIcon.svg'
 
 import uniq from 'lodash/uniq'
 
@@ -54,6 +56,16 @@ const FlightDetails = ({ foreflightTrack, geoLocation, planePic, pictures }) => 
   }
 
 
+  const iconStyle = new Style({
+    image: new Icon({
+      anchor: [0.5, 450],
+      anchorXUnits: 'fraction',
+      anchorYUnits: 'pixels',
+      scale: 0.07,
+      src: airportIcon
+    })
+  })
+
 
   useEffect(() => {
     // No need for a conditional beyond this because state is not changed
@@ -64,7 +76,13 @@ const FlightDetails = ({ foreflightTrack, geoLocation, planePic, pictures }) => 
       // Single Point
       if (uniq(geoLocation.map(x => JSON.stringify(x))).length === 1 && foreflightTrack.length === 0) {
         const firstPoint = geoLocation[0]
-        vectorSource.addFeature(new Feature(new Point(firstPoint)))
+
+        const airportFeature = new Feature({
+          geometry: new Point([firstPoint[0], firstPoint[1]]),
+        })
+        airportFeature.setStyle(iconStyle)
+
+        vectorSource.addFeature(airportFeature)
 
         const feature = vectorSource.getFeatures()[0]
         const point = feature.getGeometry()
@@ -81,7 +99,11 @@ const FlightDetails = ({ foreflightTrack, geoLocation, planePic, pictures }) => 
 
         // Add points, stringify to remove duplicates
         uniq(geoLocation.map(x => JSON.stringify(x))).map(x => JSON.parse(x)).map(x => {
-          vectorSource.addFeature(new Feature(new Point(x)))
+          const airportFeature = new Feature({
+            geometry: new Point([x[0], x[1]]),
+          })
+          airportFeature.setStyle(iconStyle)
+          vectorSource.addFeature(airportFeature)
         })
   
         const feature = vectorSource.getFeatures()[0]

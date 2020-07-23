@@ -58,8 +58,6 @@ const VisitedAirports = () => {
 
       const vS = new VectorSource()
       visitedAirports.map(x => {
-        console.log(x)
-
         const airportFeature = new Feature({
           geometry: new Point([x.lat, x.long]),
           ident: x.ident,
