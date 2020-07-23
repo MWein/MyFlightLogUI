@@ -178,7 +178,7 @@ const FlightDetails = ({ foreflightTrack, geoLocation, planePic, pictures }) => 
                 </div>
             }
 
-            <img src={modalImages[selectedImg]} style={{ maxHeight: '800px', maxWidth: '1700px' }} />
+            <img src={modalImages[selectedImg]} style={{ maxHeight: '800px', maxWidth: isMobile ? '750px' : '1700px' }} />
 
             {
               selectedImg != modalImages.length - 1 &&
