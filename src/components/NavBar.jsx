@@ -38,13 +38,10 @@ const NavBar = ({ history }) => {
     },
   ]
 
-
-  const value = paths.findIndex(x => x.link === history.location.pathname)
-
   return (
     <center style={{ width: '100%', marginTop: '20px', marginBottom: '20px' }}>
       <BottomNavigation
-        value={value}
+        value={paths.findIndex(x => x.link === history.location.pathname)}
         showLabels
         style={{ maxWidth: '750px' }}
       >
