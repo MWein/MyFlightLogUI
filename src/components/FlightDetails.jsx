@@ -146,8 +146,28 @@ const FlightDetails = ({ foreflightTrack, geoLocation, planePic, pictures }) => 
 
 
 
+  const isMobile = window.mobileCheck()
+
+  const paperStyle = () => {
+    if (isMobile) {
+      return { height: 'min-content', minWidth: '265px', marginTop: '20px', padding: '10px' }
+    } else {
+      return { height: 'min-content', width: '265px', minWidth: '265px', marginLeft: '20px', padding: '10px' }
+    }
+  }
+
+
+  const imageViewerStyle = () => {
+    if (isMobile) {
+      return { marginLeft: '10px', width: '265px' }
+    } else {
+      return { marginTop: '10px', width: '265px' }
+    }
+  }
+
+
   return (
-    <Paper style={{ height: 'min-content', width: '265px', minWidth: '265px', marginLeft: '20px', padding: '10px' }}>
+    <Paper style={paperStyle()}>
       <Modal open={displayModal} onClose={() => setDisplayModal(false)} BackdropComponent={Backdrop} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <Fade in={displayModal}>
           <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -178,9 +198,13 @@ const FlightDetails = ({ foreflightTrack, geoLocation, planePic, pictures }) => 
       </Modal>
 
 
-      <div id='map' style={{ height: '200px' }} />
-      <ImageViewer images={[ planePic ]} onClick={img => initiateModal(img, [ planePic ])} />
-      <ImageViewer images={pictures} onClick={img => initiateModal(img, pictures)} />
+
+      <div style={isMobile ? { width: '100%', display: 'inline-flex', justifyContent: 'space-between' } : {}}>
+        <div id='map' style={{ height: '200px', width: '265px' }} />
+        <ImageViewer images={[ planePic ]} onClick={img => initiateModal(img, [ planePic ])} style={imageViewerStyle()} />
+        <ImageViewer images={pictures} onClick={img => initiateModal(img, pictures)} style={imageViewerStyle()} />
+      </div>
+      
     </Paper>
   )
 }

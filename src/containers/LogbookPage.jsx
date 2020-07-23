@@ -5,8 +5,6 @@ import FlightDetails from '../components/FlightDetails'
 import superagent from 'superagent'
 
 
-
-
 const LogbookPage = () => {
   const [ loaded, setLoaded ] = useState(false)
   const [ logs, setLogs ] = useState([])
@@ -70,7 +68,6 @@ const LogbookPage = () => {
       setForeflightTrack([])
     }
   }
-  
 
 
   const geoLocation = selectedFlight != null ? logs.find(x => x.id === selectedFlight).geolocation : []
@@ -78,14 +75,13 @@ const LogbookPage = () => {
   const pictureIds = selectedFlight != null ? logs.find(x => x.id === selectedFlight).pictures: []
   const pictures = pictureIds.map(x => `http://${window.location.hostname}:8081/flight-image?imgid=${x}`)
 
-
   return (
     <div>
       <TotalTimeTable totalTimes={totalTimes} />
-
+      {window.mobileCheck() && <FlightDetails geoLocation={geoLocation} planePic={planePic} pictures={pictures} foreflightTrack={foreflightTrack} />}
       <div style={{ display: 'inline-flex', marginTop: '20px', width: '100%' }}>
         <LogTable logs={logs} selectedFlight={selectedFlight} setSelectedFlight={handleSetSelectedFlight} />
-        <FlightDetails geoLocation={geoLocation} planePic={planePic} pictures={pictures} foreflightTrack={foreflightTrack} />
+        {!window.mobileCheck() && <FlightDetails geoLocation={geoLocation} planePic={planePic} pictures={pictures} foreflightTrack={foreflightTrack} />}
       </div>
 
     </div>

@@ -4,7 +4,7 @@ import NavigateBefore from '@material-ui/icons/NavigateBefore'
 import NavigateNext from '@material-ui/icons/NavigateNext'
 
 
-const ImageViewer = ({ images = [], onClick }) => {
+const ImageViewer = ({ images = [], onClick, style = {} }) => {
   // To handle edge case where planePic is null
   const initialImages = images.filter(x => x)
 
@@ -52,7 +52,7 @@ const ImageViewer = ({ images = [], onClick }) => {
 
 
   return (
-    <Paper onMouseEnter={() => setShowNavButtons(true)} onMouseLeave={() => setShowNavButtons(false)} style={{ position: 'relative', height: '200px', marginTop: '10px', display: 'flex', alignItems: 'center' }}>
+    <Paper onMouseEnter={() => setShowNavButtons(true)} onMouseLeave={() => setShowNavButtons(false)} style={{ ...style, position: 'relative', height: '200px', display: 'flex', alignItems: 'center' }}>
       {
         displayImages && displayImages.length > 0 ?
           <img onClick={() => onClick(selectedImg)} src={displayImages[selectedImg]} style={{ display: 'block', marginLeft: 'auto', marginRight: 'auto', maxWidth: '100%', maxHeight: '200px', borderRadius: '4px' }} /> :
