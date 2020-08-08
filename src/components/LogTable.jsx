@@ -82,6 +82,7 @@ const LogTable = ({ logs, selectedFlight, setSelectedFlight }) => {
   }
 
 
+  const formatHours = hours => hours === 0 ? hours : hours.toFixed(1)
 
   const filteredSortedLogs = logs
     .filter(log => withPhotos ? log.pictures && log.pictures.length > 0 : true)
@@ -129,10 +130,10 @@ const LogTable = ({ logs, selectedFlight, setSelectedFlight }) => {
                     </div>
                   </StyledTableCell>
 
-                  <StyledTableCell align="left">{row.night}</StyledTableCell>
-                  <StyledTableCell align="left">{row.crossCountry}</StyledTableCell>
-                  <StyledTableCell align="left">{row.pic}</StyledTableCell>
-                  <StyledTableCell align="left">{row.total}</StyledTableCell>
+                  <StyledTableCell align="left">{formatHours(row.night)}</StyledTableCell>
+                  <StyledTableCell align="left">{formatHours(row.crossCountry)}</StyledTableCell>
+                  <StyledTableCell align="left">{formatHours(row.pic)}</StyledTableCell>
+                  <StyledTableCell align="left">{formatHours(row.total)}</StyledTableCell>
                   <StyledTableCell align="left">{row.remarks}</StyledTableCell>
                 </StyledTableRow>
             ))}
