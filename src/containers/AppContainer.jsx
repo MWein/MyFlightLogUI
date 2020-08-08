@@ -12,8 +12,8 @@ const AppContainer = () => {
       <BrowserRouter>
         <Container maxWidth={false} style={{ padding: '25px', height: '100vh' }}>
           <NavBar />
-          <Route component={VisitedAirports} exact path='/' />
-          <Route component={LogbookPage} path='/logbook' />
+          <Route component={LogbookPage} exact path='/' />
+          <Route component={VisitedAirports} path='/airports' />
         </Container>
       </BrowserRouter>
   )

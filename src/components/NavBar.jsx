@@ -12,14 +12,14 @@ import { withRouter } from 'react-router-dom'
 const NavBar = ({ history }) => {
   const paths = [
     {
-      label: 'Visited Airports',
+      label: 'Logbook',
       link: '/',
-      icon: <LocationOnIcon />
+      icon: <HistoryIcon />
     },
     {
-      label: 'Logbook',
-      link: '/logbook',
-      icon: <HistoryIcon />
+      label: 'Visited Airports',
+      link: '/airports',
+      icon: <LocationOnIcon />
     },
     {
       label: 'Airplanes Flown (Coming Soon)',
