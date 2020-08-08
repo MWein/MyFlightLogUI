@@ -27,7 +27,7 @@ const NavBar = ({ history }) => {
       icon: <FlightIcon />
     },
     {
-      label: 'RV14 Build Log (Coming Soon)',
+      label: 'RV-9 Build Log (Coming Soon)',
       //link: '',
       icon: <BuildIcon />
     },
