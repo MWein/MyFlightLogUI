@@ -39,16 +39,15 @@ const NavBar = ({ history }) => {
   ]
 
   return (
-    <center style={{ width: '100%', marginBottom: '20px' }}>
-      <BottomNavigation
-        value={paths.findIndex(x => x.link === history.location.pathname)}
-        showLabels
-      >
-        {paths.map(path => {
-          return (<BottomNavigationAction key={path.label} disabled={!path.link} label={path.label} icon={path.icon} onClick={() => history.push(path.link)} />)
-        })}
-      </BottomNavigation>
-    </center>
+    <BottomNavigation
+      style={{ width: '100%', marginBottom: '20px' }}
+      value={paths.findIndex(x => x.link === history.location.pathname)}
+      showLabels
+    >
+      {paths.map(path => {
+        return (<BottomNavigationAction key={path.label} disabled={!path.link} label={path.label} icon={path.icon} onClick={() => history.push(path.link)} />)
+      })}
+    </BottomNavigation>
   )
 }
 
