@@ -16,7 +16,7 @@ import LineString from 'ol/geom/LineString'
 import Point from 'ol/geom/Point'
 
 import { Icon, Style } from 'ol/style'
-import airportIcon from '../data/airportIcon.svg'
+import airportIcon from '../../data/airportIcon.svg'
 
 import uniq from 'lodash/uniq'
 

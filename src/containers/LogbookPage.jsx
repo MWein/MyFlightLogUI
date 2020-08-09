@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import TotalTimeTable from '../components/TotalTimeTable'
-import LogTable from '../components/LogTable'
-import FlightDetails from '../components/FlightDetails'
+import TotalTimeTable from '../components/FlightLog/TotalTimeTable'
+import LogTable from '../components/FlightLog/LogTable'
+import FlightDetails from '../components/FlightLog/FlightDetails'
 import superagent from 'superagent'
 
 

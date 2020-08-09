@@ -2,7 +2,7 @@ import React from 'react'
 import { BrowserRouter, Route } from 'react-router-dom'
 import VisitedAirports from './VisitedAirports'
 import LogbookPage from './LogbookPage'
-import BuildLogPage from './BuildLogPage'
+import BuildLogDir from './BuildLogDir'
 
 import NavBar from '../components/NavBar'
 
@@ -15,7 +15,7 @@ const AppContainer = () => {
           <NavBar />
           <Route component={LogbookPage} exact path='/' />
           <Route component={VisitedAirports} path='/airports' />
-          <Route component={BuildLogPage} path='/buildlog' />
+          <Route component={BuildLogDir} path='/buildlog' />
         </Container>
       </BrowserRouter>
   )
