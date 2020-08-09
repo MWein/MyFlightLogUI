@@ -27,8 +27,8 @@ const NavBar = ({ history }) => {
       icon: <FlightIcon />
     },
     {
-      label: 'RV-9 Build Log (Coming Soon)',
-      //link: '',
+      label: 'RV-9 Build Log',
+      link: '/buildlog',
       icon: <BuildIcon />
     },
     {
@@ -45,7 +45,7 @@ const NavBar = ({ history }) => {
         showLabels
       >
         {paths.map(path => {
-          return (<BottomNavigationAction disabled={!path.link} label={path.label} icon={path.icon} onClick={() => history.push(path.link)} />)
+          return (<BottomNavigationAction key={path.label} disabled={!path.link} label={path.label} icon={path.icon} onClick={() => history.push(path.link)} />)
         })}
       </BottomNavigation>
     </center>
