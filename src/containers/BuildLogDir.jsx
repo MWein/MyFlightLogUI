@@ -49,6 +49,12 @@ const BuildLogDir = ({ history }) => {
   }
 
   useEffect(() => {
+    // Navigate directly to the project page if theres only one
+    if (history.location.pathname === '/buildlog' && projects.length === 1) {
+      console.log('Fuck yeah')
+      history.push(`${url}/${projects[0].id}`)
+    }
+
     if (!loaded) {
       getProjects()
     }
