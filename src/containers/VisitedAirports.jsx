@@ -101,7 +101,7 @@ const VisitedAirports = () => {
         positioning: 'bottom-center',
         stopEvent: false,
         offset: [0, -50]
-      });
+      })
       newMap.addOverlay(popup)
 
 
@@ -120,10 +120,10 @@ const VisitedAirports = () => {
 
 
       newMap.on('pointermove', event => {
-        const pixel = newMap.getEventPixel(event.originalEvent);
-        const hit = newMap.hasFeatureAtPixel(pixel);
+        const pixel = newMap.getEventPixel(event.originalEvent)
+        const hit = newMap.hasFeatureAtPixel(pixel)
         document.getElementById('map').style.cursor = hit ? 'pointer' : null
-      });
+      })
 
 
       setMap(newMap)
