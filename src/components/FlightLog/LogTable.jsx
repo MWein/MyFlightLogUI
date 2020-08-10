@@ -10,7 +10,7 @@ import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Checkbox from '@material-ui/core/Checkbox'
-
+import PropTypes from 'prop-types'
 
 
 const StyledTableCell = withStyles((theme) => ({
@@ -48,7 +48,7 @@ const LogTable = ({ logs, selectedFlight, setSelectedFlight }) => {
   const [ withForeflighTrack, setWithForeflightTrack ] = useState(false)
 
   const [ page, setPage ] = useState(0)
-  const [ rowsPerPage, setRowsPerPage ] = useState(10)
+  const [ rowsPerPage ] = useState(10)
 
 
   const handlePhotoFilterChange = event => {
@@ -136,7 +136,7 @@ const LogTable = ({ logs, selectedFlight, setSelectedFlight }) => {
                   <StyledTableCell align="left">{formatHours(row.total)}</StyledTableCell>
                   <StyledTableCell align="left">{row.remarks}</StyledTableCell>
                 </StyledTableRow>
-            ))}
+              ))}
           </TableBody>
         </Table>
       </TableContainer>
@@ -180,6 +180,15 @@ const LogTable = ({ logs, selectedFlight, setSelectedFlight }) => {
     </Paper>
   )
 }
+
+
+
+LogTable.propTypes = {
+  logs: PropTypes.array,
+  selectedFlight: PropTypes.string,
+  setSelectedFlight: PropTypes.func,
+}
+
 
 
 export default LogTable

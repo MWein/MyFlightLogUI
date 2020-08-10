@@ -7,7 +7,7 @@ import TableContainer from '@material-ui/core/TableContainer'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
-
+import PropTypes from 'prop-types'
 
 
 const StyledTableCell = withStyles((theme) => ({
@@ -73,6 +73,11 @@ const TotalTimeTable = ({ totalTimes }) => {
       </Table>
     </TableContainer>
   )
+}
+
+
+TotalTimeTable.propTypes = {
+  totalTimes: PropTypes.object
 }
 
 

@@ -20,6 +20,9 @@ import airportIcon from '../../data/airportIcon.svg'
 
 import uniq from 'lodash/uniq'
 
+import PropTypes from 'prop-types'
+
+
 
 const FlightDetails = ({ foreflightTrack, geoLocation, planePic, pictures }) => {
   const latlong2Meters = (lat, lon) => {
@@ -208,5 +211,14 @@ const FlightDetails = ({ foreflightTrack, geoLocation, planePic, pictures }) => 
     </Paper>
   )
 }
+
+
+FlightDetails.propTypes = {
+  foreflightTrack: PropTypes.array,
+  geoLocation: PropTypes.array,
+  planePic: PropTypes.string,
+  pictures: PropTypes.array,
+}
+
 
 export default FlightDetails

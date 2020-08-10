@@ -7,6 +7,7 @@ import FlightIcon from '@material-ui/icons/Flight'
 //import DeveloperIcon from '@material-ui/icons/DeveloperBoard'
 import BuildIcon from '@material-ui/icons/Build'
 import { withRouter } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 
 const NavBar = ({ history }) => {
@@ -40,7 +41,7 @@ const NavBar = ({ history }) => {
 
   const determineCurrentPage = () => {
     const path = history.location.pathname
-    return path === '/' ? paths.findIndex(x => path === '/') : paths.findIndex(x => path.includes(x.link) && x.link !== '/')
+    return path === '/' ? paths.findIndex(x => x.link === '/') : paths.findIndex(x => path.includes(x.link) && x.link !== '/')
   }
 
   return (
@@ -55,5 +56,11 @@ const NavBar = ({ history }) => {
     </BottomNavigation>
   )
 }
+
+
+NavBar.propTypes = {
+  history: PropTypes.object
+}
+
 
 export default withRouter(NavBar)

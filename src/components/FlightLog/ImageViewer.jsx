@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Paper from '@material-ui/core/Paper'
 import NavigateBefore from '@material-ui/icons/NavigateBefore'
 import NavigateNext from '@material-ui/icons/NavigateNext'
+import PropTypes from 'prop-types'
 
 
 const ImageViewer = ({ images = [], onClick, style = {} }) => {
@@ -69,6 +70,13 @@ const ImageViewer = ({ images = [], onClick, style = {} }) => {
 
     </Paper>
   )
+}
+
+
+ImageViewer.propTypes = {
+  images: PropTypes.array,
+  onClick: PropTypes.func,
+  style: PropTypes.object,
 }
 
 
