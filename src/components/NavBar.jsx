@@ -27,15 +27,15 @@ const NavBar = ({ history }) => {
       icon: <FlightIcon />
     },
     {
-      label: 'RV-9 Build Log',
+      label: 'Build Log',
       link: '/buildlog',
       icon: <BuildIcon />
     },
-    {
-      label: 'About This Site (Coming Soon)',
-      //link: '',
-      icon: <DeveloperIcon />
-    },
+    // {
+    //   label: 'About This Site (Coming Soon)',
+    //   //link: '',
+    //   icon: <DeveloperIcon />
+    // },
   ]
 
   const determineCurrentPage = () => {
