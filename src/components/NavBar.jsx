@@ -38,10 +38,15 @@ const NavBar = ({ history }) => {
     },
   ]
 
+  const determineCurrentPage = () => {
+    const path = history.location.pathname
+    return path === '/' ? paths.findIndex(x => path === '/') : paths.findIndex(x => path.includes(x.link) && x.link !== '/')
+  }
+
   return (
     <BottomNavigation
       style={{ width: '100%', marginBottom: '20px' }}
-      value={paths.findIndex(x => x.link === history.location.pathname)}
+      value={determineCurrentPage()}
       showLabels
     >
       {paths.map(path => {
