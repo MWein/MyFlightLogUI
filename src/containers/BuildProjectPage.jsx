@@ -1,42 +1,52 @@
-import React from 'react'
-import { useParams } from 'react-router-dom'
-import List from '@material-ui/core/List'
+import React, { useState } from 'react'
 import Typography from '@material-ui/core/Typography'
 import Divider from '@material-ui/core/Divider'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemText from '@material-ui/core/ListItemText'
 import Paper from '@material-ui/core/Paper'
-import Button from '@material-ui/core/Button'
+import PhasesList from '../components/BuildLog/PhasesList'
 
 
-const buildPhases = [
+const buildPhasesSample = [
   {
     name: 'Research',
-    id: 'whatever'
+    id: '1',
+    complete: false,
+    entries: 5,
   },
   {
     name: 'Workshop',
-    id: 'whatever'
+    id: '2',
+    complete: true,
+    entries: 0
   },
   {
     name: 'Practice',
-    id: 'whatever'
+    id: '3',
+    complete: true,
+    entries: 0
   },
   {
     name: 'Empennage',
-    id: 'whatever'
+    id: '4',
+    complete: false,
+    entries: 0
   },
   {
     name: 'Horizontal Stabilizer',
-    id: 'whatever'
+    id: '5',
+    complete: true,
+    entries: 0
   },
   {
     name: 'Wings',
-    id: 'whatever'
+    id: '6',
+    complete: false,
+    entries: 0
   },
   {
     name: 'Fuselage',
-    id: 'whatever'
+    id: '7',
+    complete: false,
+    entries: 0
   },
 ]
 
@@ -44,37 +54,18 @@ const buildPhases = [
 const BuildProjectPage = () => {
   //const { buildId } = useParams()
   
+  const [ buildPhases, setBuildPhases ] = useState(buildPhasesSample)
+  const [ selectedPhase, setSelectedPhase ] = useState('all')
+
+
+
+
   return (
     <div style={{ display: 'flex' }}>
-      <div>
-        <Button variant='contained' color='primary' style={{ width: '100%', marginBottom: '15px' }}>
-          Generate Report
-        </Button>
-
-        <Paper style={{ width: '200px', minWidth: '200px', maxHeight: 'auto' }}>
-          <Typography variant='h6' style={{ textAlign: 'center', paddingTop: '5px', paddingBottom: '5px' }}>
-            Phases
-          </Typography>
-
-          <Divider />
-          
-          <List>
-            <ListItem button key='showall'>
-              <ListItemText primary='Show All Entries' />
-            </ListItem>
-            {buildPhases.map(x => x.name).map(text => (
-              <ListItem selected={text == 'Wings'} button key={text}>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
-          </List>
-        </Paper>
-      </div>
+      <PhasesList selection={selectedPhase} phases={buildPhases} onChange={id => {setSelectedPhase(id)}} />
 
 
-
-
-      <div style={{ background: 'green', width: '100%', marginLeft: '15px', height: '1000px' }}>
+      <div style={{ width: '100%' }}>
 
 
         <div style={{ display: 'flex' }}>
@@ -82,7 +73,7 @@ const BuildProjectPage = () => {
 
             <div style={{ display: 'flex', position: 'relative' }}>
               <Typography variant='h5'>
-                Vans RV-9 (Horizontal Stabilizer)
+                Vans RV-9 {selectedPhase !== 'all' && `(${buildPhases.find(x => x.id === selectedPhase).name})`}
               </Typography>
 
               <Typography style={{ position: 'absolute', right: '15px' }} variant='h6'>
