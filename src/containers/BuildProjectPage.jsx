@@ -20,9 +20,13 @@ const BuildProjectPage = () => {
 
 
   const getEntries = () => {
-    return selectedPhase == 'all' ?
+    const entries = selectedPhase == 'all' ?
       buildProjectData.phases.reduce((acc, x) => [ ...acc, ...x.entries ], [])
       : buildProjectData.phases.find(x => x.id === selectedPhase).entries
+
+    return entries.sort((a, b) => {
+      return moment(b.date) - moment(a.date)
+    })
   }
 
 
