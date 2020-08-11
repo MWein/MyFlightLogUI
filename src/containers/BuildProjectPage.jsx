@@ -1,68 +1,59 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Typography from '@material-ui/core/Typography'
 import Divider from '@material-ui/core/Divider'
 import Paper from '@material-ui/core/Paper'
 import PhasesList from '../components/BuildLog/PhasesList'
+import superagent from 'superagent'
+import { useParams } from 'react-router-dom'
 
-
-const buildPhasesSample = [
-  {
-    name: 'Research',
-    id: '1',
-    complete: false,
-    entries: 5,
-  },
-  {
-    name: 'Workshop',
-    id: '2',
-    complete: true,
-    entries: 0
-  },
-  {
-    name: 'Practice',
-    id: '3',
-    complete: true,
-    entries: 0
-  },
-  {
-    name: 'Empennage',
-    id: '4',
-    complete: false,
-    entries: 0
-  },
-  {
-    name: 'Horizontal Stabilizer',
-    id: '5',
-    complete: true,
-    entries: 0
-  },
-  {
-    name: 'Wings',
-    id: '6',
-    complete: false,
-    entries: 0
-  },
-  {
-    name: 'Fuselage',
-    id: '7',
-    complete: false,
-    entries: 0
-  },
-]
 
 
 const BuildProjectPage = () => {
-  //const { buildId } = useParams()
+  const { buildId } = useParams()
   
-  const [ buildPhases, setBuildPhases ] = useState(buildPhasesSample)
+  const [ loaded, setLoaded ] = useState(false)
+  const [ loading, setLoading ] = useState(false)
+
+  const [ buildProjectData, setBuildProjectData ] = useState({ name: 'Loading', phases: [] })
   const [ selectedPhase, setSelectedPhase ] = useState('all')
 
 
 
+  const getHours = () => {
+    const entries = selectedPhase == 'all' ?
+      buildProjectData.phases.reduce((acc, x) => [ ...acc, ...x.entries ], [])
+      : buildProjectData.phases.find(x => x.id === selectedPhase).entries
+
+    const hours = (entries.reduce((acc, x) => acc + x.minutes, 0) / 60).toFixed(2)
+
+    return `${hours} ${hours === 1 ? 'Hour' : 'Hours'}`
+  }
+
+
+
+  const getBuildDetails = async () => {
+    const response = await superagent.get(`http://${window.location.hostname}:8081/build-details?buildid=${buildId}`)
+    const projectData = JSON.parse(response.text)
+
+    console.log(projectData)
+
+    setLoaded(true)
+    setLoading(false)
+    setBuildProjectData(projectData)
+  }
+
+
+  useEffect(() => {
+    if (!loaded && !loading) {
+      setLoading(true)
+      getBuildDetails()
+    }
+  })
+
 
   return (
     <div style={{ display: 'flex' }}>
-      <PhasesList selection={selectedPhase} phases={buildPhases} onChange={id => {setSelectedPhase(id)}} />
+      <PhasesList selection={selectedPhase} phases={buildProjectData.phases} onChange={id => {setSelectedPhase(id)}} />
 
 
       <div style={{ width: '100%' }}>
@@ -73,7 +64,7 @@ const BuildProjectPage = () => {
 
             <div style={{ display: 'flex', position: 'relative' }}>
               <Typography variant='h5'>
-                Vans RV-9 {selectedPhase !== 'all' && `(${buildPhases.find(x => x.id === selectedPhase).name})`}
+                {buildProjectData.name} {selectedPhase !== 'all' && `(${buildProjectData.phases.find(x => x.id === selectedPhase).name})`}
               </Typography>
 
               <Typography style={{ position: 'absolute', right: '15px' }} variant='h6'>
@@ -84,7 +75,7 @@ const BuildProjectPage = () => {
             <Divider style={{ marginTop: '10px', marginBottom: '10px' }} />
 
             <Typography variant='h6'>
-              150.1 Hours
+              {getHours(selectedPhase)}
             </Typography>
             <Typography variant='h6'>
               $3500.01

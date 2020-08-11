@@ -14,7 +14,7 @@ const PhasesList = ({ phases = [], selection, hidden, onChange = () => {} }) => 
     return null
   }
   
-  const totalEntries = phases.reduce((acc, x) => acc + x.entries, 0)
+  const totalEntries = phases.reduce((acc, x) => acc + x.entries.length, 0)
 
   return (
     <div style={{ marginRight: '15px', width: '200px', minWidth: '200px' }}>
@@ -38,7 +38,7 @@ const PhasesList = ({ phases = [], selection, hidden, onChange = () => {} }) => 
           </ListItem>
           {phases.map(phase => (
             <ListItem selected={phase.id === selection} button key={phase.name} onClick={() => onChange(phase.id)}>
-              <ListItemText primary={`${phase.name}${phase.entries > 0 ? ` (${phase.entries})` : ''}`} />
+              <ListItemText primary={`${phase.name}${phase.entries.length > 0 ? ` (${phase.entries.length})` : ''}`} />
 
               {phase.complete &&
                 <Paper style={{ background: 'green', padding: '5px', fontSize: '12px', color: 'gold' }}>
