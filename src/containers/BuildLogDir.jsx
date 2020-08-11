@@ -4,6 +4,7 @@ import superagent from 'superagent'
 import Paper from '@material-ui/core/Paper'
 import moment from 'moment'
 import BuildProjectPage from './BuildProjectPage'
+import PropTypes from 'prop-types'
 
 
 const ProjectCard = (id, name, hours, lastEntry, onClick = () => {}) => {
@@ -71,12 +72,18 @@ const BuildLogDir = ({ history }) => {
         </Route>
 
         <Route path={`${url}/:buildId`}>
-            <BuildProjectPage />
+          <BuildProjectPage />
         </Route>
 
       </Switch>
     </div>
   )
 }
+
+
+BuildLogDir.propTypes = {
+  history: PropTypes.object
+}
+
 
 export default withRouter(BuildLogDir)
