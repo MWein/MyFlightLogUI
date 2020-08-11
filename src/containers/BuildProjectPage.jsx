@@ -29,21 +29,23 @@ const BuildProjectPage = () => {
 
   const getHeaderData = () => {
     const phase = buildProjectData.phases.find(x => x.id === selectedPhase)
-
     const complete = selectedPhase === 'all' ? buildProjectData.phases.reduce((acc, x) => !x ? false : acc, false) : phase.complete
 
     const entries = selectedPhase == 'all' ?
       buildProjectData.phases.reduce((acc, x) => [ ...acc, ...x.entries ], [])
       : phase.entries
 
+    // Hours
     const hours = (entries.reduce((acc, x) => acc + x.minutes, 0) / 60).toFixed(2)
     const hoursText = `${hours} ${hours === 1 ? 'Hour' : 'Hours'}`
 
+    // Rivets
+    const rivets = entries.reduce((acc, x) => acc + x.rivets, 0)
+    const rivetsText = `${rivets} ${rivets === 1 ? 'Rivet' : 'Rivets'}`
 
-    const entryDates = entries.map(x => x.date).sort()
-
-
+    // Timeline string
     let timeline
+    const entryDates = entries.map(x => x.date).sort()
     const firstDate = entryDates[0]
     const lastDate = entryDates[entryDates.length - 1]
     if (!firstDate) {
@@ -54,8 +56,7 @@ const BuildProjectPage = () => {
       timeline = `${moment(firstDate).format('D MMMM YYYY')} - Ongoing`
     }
 
-
-
+    // Cost
     var formatter = new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
@@ -68,9 +69,10 @@ const BuildProjectPage = () => {
       hours: hoursText,
       timeline,
       cost,
+      rivets: rivetsText,
     }
   }
-  const { hours, timeline, cost } = getHeaderData()
+  const { hours, timeline, cost, rivets } = getHeaderData()
 
 
   const entries = getEntries()
@@ -117,6 +119,9 @@ const BuildProjectPage = () => {
               {hours}
             </Typography>
             <Typography variant='h6'>
+              {rivets}
+            </Typography>
+            <Typography variant='h6'>
               {cost}
             </Typography>
           </Paper>
@@ -135,7 +140,8 @@ const BuildProjectPage = () => {
                 </Typography>
 
                 <Typography variant='h6'>
-                  {`${entry.title} - (${(entry.minutes / 60).toFixed(2)} Hours)`}
+                  {`${entry.title} - (${(entry.minutes / 60).toFixed(2)} Hours`}
+                  {entry.rivets === 0 ? ')' : `, ${entry.rivets} ${entry.rivets === 1 ? 'Rivet' : 'Rivets'})`}
                 </Typography>
 
                 <Typography variant='h6' style={{ position: 'absolute', right: '15px' }}>
