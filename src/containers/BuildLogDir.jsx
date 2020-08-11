@@ -68,6 +68,8 @@ const BuildLogDir = ({ history }) => {
         <Route exact path={`${url}/`}>
           <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
             {projects.map(proj => ProjectCard(proj.id, proj.name, proj.hours, proj.lastEntry, () => {history.push(`${url}/${proj.id}`)}))}
+
+            {projects.length === 0 && <div style={{ color: 'white' }}>- No Build Projects -</div>}
           </div>
         </Route>
 

@@ -66,7 +66,7 @@ const BuildProjectPage = () => {
       currency: 'USD',
     })
 
-    const cost = formatter.format(3400.25)
+    const cost = formatter.format(0)
 
 
     return {
