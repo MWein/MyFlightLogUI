@@ -6,6 +6,7 @@ import PhasesList from '../components/BuildLog/PhasesList'
 import superagent from 'superagent'
 import { useParams } from 'react-router-dom'
 import moment from 'moment'
+import LineGraph from '../components/BuildLog/LineGraph'
 
 
 const BuildProjectPage = () => {
@@ -28,6 +29,7 @@ const BuildProjectPage = () => {
       return moment(b.date) - moment(a.date)
     })
   }
+
 
 
 
@@ -79,8 +81,23 @@ const BuildProjectPage = () => {
   const { hours, timeline, cost, rivets } = getHeaderData()
 
 
-  const entries = getEntries()
 
+  const createHoursGraphObject = entries => {
+    if (selectedPhase === 'all') {
+      return buildProjectData.phases.map(x => x.name).map(phase => ({
+        label: phase,
+        value: entries.filter(x => x.phase === phase).reduce((acc, x) => acc + x.minutes, 0) / 60
+      })
+      )
+    }
+    
+  }
+
+
+
+
+  const entries = getEntries()
+  const hoursGraphObject = createHoursGraphObject(entries)
 
 
   const getBuildDetails = async () => {
@@ -119,15 +136,40 @@ const BuildProjectPage = () => {
 
             <Divider style={{ marginTop: '10px', marginBottom: '10px' }} />
 
-            <Typography variant='h6'>
-              {hours}
-            </Typography>
-            <Typography variant='h6'>
-              {rivets}
-            </Typography>
-            <Typography variant='h6'>
-              {cost}
-            </Typography>
+            <table width="100%">
+              <tr>
+                <td style={{ width: '150px' }}>
+                  <Typography variant='h6'>
+                    {hours}
+                  </Typography>
+                </td>
+                <td>
+                  <LineGraph inputs={hoursGraphObject} valueLabel='Hours' />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <Typography variant='h6'>
+                    {rivets}
+                  </Typography>
+                </td>
+                <td>
+                  <LineGraph />
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <Typography variant='h6'>
+                    {cost}
+                  </Typography>
+                </td>
+                <td>
+                  <LineGraph />
+                </td>
+              </tr>
+            </table>
+
           </Paper>
 
           <Paper style={{ width: '100%', minWidth: '350px', marginLeft: '15px' }}>
