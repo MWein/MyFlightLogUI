@@ -72,7 +72,7 @@ const BuildProjectPage = () => {
 
     // Cost
     const expenses = selectedPhase === 'all' ? buildProjectData.phases.reduce((acc, x) => [ ...acc, ...x.expenses ], []) : buildProjectData.phases.find(x => x.id === selectedPhase).expenses
-    const cost = currencyFormatter.format(expenses.reduce((acc, x) => acc + x.cost, 0))
+    const cost = currencyFormatter.format(expenses.filter(x => !x.projected).reduce((acc, x) => acc + x.cost, 0))
 
 
     return {
@@ -105,17 +105,39 @@ const BuildProjectPage = () => {
 
   const createExpensesGraphObject = () => {
     if (selectedPhase === 'all') {
-      return buildProjectData.phases.map(phase => ({
+      const nonProjectedCosts = buildProjectData.phases.map(phase => ({
         label: phase.name,
-        value: phase.expenses.reduce((acc, x) => acc + x.cost, 0)
+        value: phase.expenses.filter(x => !x.projected).reduce((acc, x) => acc + x.cost, 0)
       })
       )
+
+      const projectedCosts = buildProjectData.phases.reduce((acc, x) => [ ...acc, ...x.expenses.filter(x => x.projected) ], [])
+
+      return [
+        ...nonProjectedCosts,
+        {
+          label: 'Projected',
+          value: projectedCosts.reduce((acc, x) => acc + x.cost, 0),
+          color: 'black'
+        }
+      ]
     }
 
-    return buildProjectData.phases.find(x => x.id === selectedPhase).expenses.map(expense => ({
+    const nonProjectedCosts = buildProjectData.phases.find(x => x.id === selectedPhase).expenses.filter(x => !x.projected).map(expense => ({
       label: expense.description,
       value: expense.cost
     }))
+
+    const projectedCosts = buildProjectData.phases.find(x => x.id === selectedPhase).expenses.filter(x => x.projected)
+
+    return [
+      ...nonProjectedCosts,
+      {
+        label: 'Projected',
+        value: projectedCosts.reduce((acc, x) => acc + x.cost, 0),
+        color: 'black'
+      }
+    ]
   }
 
 
