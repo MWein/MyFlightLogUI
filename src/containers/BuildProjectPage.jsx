@@ -90,7 +90,12 @@ const BuildProjectPage = () => {
       })
       )
     }
-    
+
+    // Slice is used because reverse mutates the orginal array. No bueno
+    return entries.slice().reverse().map(entry => ({
+      label: entry.title,
+      value: entry.minutes / 60
+    }))
   }
 
 

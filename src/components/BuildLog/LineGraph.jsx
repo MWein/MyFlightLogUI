@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 
 const LineGraph = ({ inputs = [], valueLabel = '' }) => {
-  const colors = [ 'blue', 'red', 'aqua', 'olive', 'purple', 'lime', 'green', 'navy', 'blue', 'aqua', 'teal' ]
+  const colors = [ 'blue', 'red', 'aqua', 'purple', 'lime', 'green', 'navy', 'blue', 'aqua', 'teal' ]
 
   let nextColor = 0
   let startingPixel = 10
@@ -58,17 +58,17 @@ const LineGraph = ({ inputs = [], valueLabel = '' }) => {
 
       {/* Ticks */}
       {inputsWithXValues.map(input => {
-        return (<line key={`${input.id}tick`} x1={input.x1} y1="2" x2={input.x1} y2="18" strokeWidth="2" stroke='black' />)
+        return (<line key={`${input.id}tick`} x1={input.x1} y1="4" x2={input.x1} y2="16" strokeWidth="2" stroke='black' />)
       })}
 
       {/* No values placeholder */}
       {inputs.length === 0 ? (
         <g>
-          <line key='firsttick' x1={10} y1="2" x2={10} y2="18" strokeWidth="2" stroke='black' />
+          <line key='firsttick' x1={10} y1="4" x2={10} y2="16" strokeWidth="2" stroke='black' />
         </g>
       ) : null}
 
-      <line key='finaltick' x1={490} y1="2" x2={490} y2="18" strokeWidth="2" stroke='black' />
+      <line key='finaltick' x1={490} y1="4" x2={490} y2="16" strokeWidth="2" stroke='black' />
     </svg>
   )
 }
