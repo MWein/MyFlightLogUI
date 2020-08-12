@@ -171,7 +171,7 @@ const BuildProjectPage = () => {
 
       <div style={{ width: '100%' }}>
         <div style={{ display: 'flex' }}>
-          <Paper style={{ padding: '15px', minWidth: '700px', width: '100%' }}>
+          <Paper style={{ padding: '15px', minWidth: '700px' }}>
             <div style={{ display: 'flex', position: 'relative' }}>
               <Typography variant='h5'>
                 {buildProjectData.name} {selectedPhase !== 'all' && `(${buildProjectData.phases.find(x => x.id === selectedPhase).name})`}
@@ -219,9 +219,9 @@ const BuildProjectPage = () => {
 
           </Paper>
 
-          {/* <Paper style={{ width: '100%', minWidth: '350px', marginLeft: '15px' }}>
+          <Paper style={{ width: '100%', minWidth: '350px', marginLeft: '15px' }}>
             TODO:: Graph display with hours, rivets, expenses over time
-          </Paper> */}
+          </Paper>
         </div>
 
         {entries.map(entry => {
