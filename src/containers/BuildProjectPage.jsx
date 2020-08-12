@@ -13,7 +13,6 @@ const BuildProjectPage = () => {
   const { buildId } = useParams()
   
   const [ loaded, setLoaded ] = useState(false)
-  const [ loading, setLoading ] = useState(false)
 
   const [ buildProjectData, setBuildProjectData ] = useState({ name: 'Loading', phases: [] })
   const [ selectedPhase, setSelectedPhase ] = useState('all')
@@ -152,17 +151,15 @@ const BuildProjectPage = () => {
     const projectData = JSON.parse(response.text)
 
     setLoaded(true)
-    setLoading(false)
     setBuildProjectData(projectData)
   }
 
 
   useEffect(() => {
-    if (!loaded && !loading) {
-      setLoading(true)
+    if (!loaded) {
       getBuildDetails()
     }
-  })
+  }, [ loaded ])
 
 
   return (
