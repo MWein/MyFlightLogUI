@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 
-const LineGraph = ({ inputs = [], valueLabel = '' }) => {
+const LineGraph = ({ inputs = [], valueLabel = '', formatter }) => {
   const colors = [ 'blue', 'red', 'aqua', 'purple', 'lime', 'green', 'navy', 'blue', 'aqua', 'teal' ]
 
   let nextColor = 0
@@ -50,7 +50,7 @@ const LineGraph = ({ inputs = [], valueLabel = '' }) => {
 
             {/* Tooltip */}
             <rect x={input.x1} width={input.x2 - input.x1} height='20' fill='transparent'>
-              <title>{`${input.label} - ${input.value} ${valueLabel}`}</title>
+              <title>{`${input.label} - ${formatter ? formatter.format(input.value) : input.value} ${valueLabel}`}</title>
             </rect>
           </g>
         )
@@ -77,6 +77,7 @@ const LineGraph = ({ inputs = [], valueLabel = '' }) => {
 LineGraph.propTypes = {
   inputs: PropTypes.array,
   valueLabel: PropTypes.string,
+  formatter: PropTypes.object,
 }
 
 

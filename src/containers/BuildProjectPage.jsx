@@ -20,6 +20,13 @@ const BuildProjectPage = () => {
 
 
 
+  const currencyFormatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  })
+
+
+
   const getEntries = () => {
     const entries = selectedPhase == 'all' ?
       buildProjectData.phases.reduce((acc, x) => [ ...acc, ...x.entries ], [])
@@ -65,13 +72,7 @@ const BuildProjectPage = () => {
 
     // Cost
     const expenses = selectedPhase === 'all' ? buildProjectData.phases.reduce((acc, x) => [ ...acc, ...x.expenses ], []) : buildProjectData.phases.find(x => x.id === selectedPhase).expenses
-
-    var formatter = new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-    })
-
-    const cost = formatter.format(expenses.reduce((acc, x) => acc + x.cost, 0))
+    const cost = currencyFormatter.format(expenses.reduce((acc, x) => acc + x.cost, 0))
 
 
     return {
@@ -189,7 +190,7 @@ const BuildProjectPage = () => {
                   </Typography>
                 </td>
                 <td>
-                  <LineGraph inputs={expensesGraphObject} />
+                  <LineGraph inputs={expensesGraphObject} formatter={currencyFormatter} />
                 </td>
               </tr>
             </table>
