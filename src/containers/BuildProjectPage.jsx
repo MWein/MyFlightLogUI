@@ -62,13 +62,16 @@ const BuildProjectPage = () => {
       timeline = `${moment(firstDate).format('D MMMM YYYY')} - Ongoing`
     }
 
+
     // Cost
+    const expenses = selectedPhase === 'all' ? buildProjectData.phases.reduce((acc, x) => [ ...acc, ...x.expenses ], []) : buildProjectData.phases.find(x => x.id === selectedPhase).expenses
+
     var formatter = new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
     })
 
-    const cost = formatter.format(0)
+    const cost = formatter.format(expenses.reduce((acc, x) => acc + x.cost, 0))
 
 
     return {
@@ -99,10 +102,26 @@ const BuildProjectPage = () => {
   }
 
 
+  const createExpensesGraphObject = () => {
+    if (selectedPhase === 'all') {
+      return buildProjectData.phases.map(phase => ({
+        label: phase.name,
+        value: phase.expenses.reduce((acc, x) => acc + x.cost, 0)
+      })
+      )
+    }
+
+    return buildProjectData.phases.find(x => x.id === selectedPhase).expenses.map(expense => ({
+      label: expense.description,
+      value: expense.cost
+    }))
+  }
+
 
 
   const entries = getEntries()
   const hoursGraphObject = createHoursGraphObject(entries)
+  const expensesGraphObject = createExpensesGraphObject()
 
 
   const getBuildDetails = async () => {
@@ -170,7 +189,7 @@ const BuildProjectPage = () => {
                   </Typography>
                 </td>
                 <td>
-                  <LineGraph />
+                  <LineGraph inputs={expensesGraphObject} />
                 </td>
               </tr>
             </table>
