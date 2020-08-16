@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getEntriesFromPhase Returns all entries if selectedPhase is all 1`] = `
+Array [
+  "Research1",
+  "Research2",
+  "Research3",
+  "Workshop1",
+  "Workshop2",
+]
+`;
+
+exports[`getEntriesFromPhase Returns only entries belonging to a particular phase 1`] = `
+Array [
+  "Workshop1",
+  "Workshop2",
+]
+`;
