@@ -8,6 +8,7 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
 import PropTypes from 'prop-types'
+import moment from 'moment'
 
 
 const StyledTableCell = withStyles((theme) => ({
@@ -41,6 +42,10 @@ const useStyles = makeStyles({
 const TotalTimeTable = ({ totalTimes }) => {
   const classes = useStyles()
 
+  const today = moment()
+  const month = today.format('MMMM')
+  const year = today.format('YYYY')
+
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="customized table">
@@ -49,11 +54,12 @@ const TotalTimeTable = ({ totalTimes }) => {
             <StyledTableCell align="left">Takeoffs</StyledTableCell>
             <StyledTableCell align="left">Landings</StyledTableCell>
             <StyledTableCell align="left">Night</StyledTableCell>
-            <StyledTableCell align="left">Actual Instrument</StyledTableCell>
             <StyledTableCell align="left">Simulated Instrument</StyledTableCell>
             <StyledTableCell align="left">Cross Country</StyledTableCell>
             <StyledTableCell align="left">Dual</StyledTableCell>
             <StyledTableCell align="left">Pilot in Command</StyledTableCell>
+            <StyledTableCell align="left">{month}</StyledTableCell>
+            <StyledTableCell align="left">{year}</StyledTableCell>
             <StyledTableCell align="left">Total</StyledTableCell>
           </TableRow>
         </TableHead>
@@ -61,13 +67,14 @@ const TotalTimeTable = ({ totalTimes }) => {
           <StyledTableRow>
             <StyledTableCell align="left">{totalTimes.takeoffs}</StyledTableCell>
             <StyledTableCell align="left">{totalTimes.landings}</StyledTableCell>
-            <StyledTableCell align="left">{totalTimes.night}</StyledTableCell>
-            <StyledTableCell align="left">{totalTimes.instrument}</StyledTableCell>
-            <StyledTableCell align="left">{totalTimes.simInstrument}</StyledTableCell>
-            <StyledTableCell align="left">{totalTimes.crossCountry}</StyledTableCell>
-            <StyledTableCell align="left">{totalTimes.dual}</StyledTableCell>
-            <StyledTableCell align="left">{totalTimes.pic}</StyledTableCell>
-            <StyledTableCell align="left">{totalTimes.total}</StyledTableCell>
+            <StyledTableCell align="left">{totalTimes.night.toFixed(1)}</StyledTableCell>
+            <StyledTableCell align="left">{totalTimes.simInstrument.toFixed(1)}</StyledTableCell>
+            <StyledTableCell align="left">{totalTimes.crossCountry.toFixed(1)}</StyledTableCell>
+            <StyledTableCell align="left">{totalTimes.dual.toFixed(1)}</StyledTableCell>
+            <StyledTableCell align="left">{totalTimes.pic.toFixed(1)}</StyledTableCell>
+            <StyledTableCell align="left">{totalTimes.month.toFixed(1)}</StyledTableCell>
+            <StyledTableCell align="left">{totalTimes.year.toFixed(1)}</StyledTableCell>
+            <StyledTableCell align="left">{totalTimes.total.toFixed(1)}</StyledTableCell>
           </StyledTableRow>
         </TableBody>
       </Table>

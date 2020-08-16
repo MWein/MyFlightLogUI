@@ -3,22 +3,26 @@ import TotalTimeTable from '../components/FlightLog/TotalTimeTable'
 import LogTable from '../components/FlightLog/LogTable'
 import FlightDetails from '../components/FlightLog/FlightDetails'
 import superagent from 'superagent'
+import moment from 'moment'
 
 
 const LogbookPage = () => {
-  const [ loaded, setLoaded ] = useState(false)
-  const [ logs, setLogs ] = useState([])
-  const [ totalTimes, setTotalTimes ] = useState({
+  const startingTotalTimes = {
     takeoffs: 0,
     landings: 0,
     night: 0,
-    instrument: 0,
     simInstrument: 0,
     crossCountry: 0,
     dual: 0,
     pic: 0,
+    month: 0,
+    year: 0,
     total: 0,
-  })
+  }
+
+  const [ loaded, setLoaded ] = useState(false)
+  const [ logs, setLogs ] = useState([])
+  const [ totalTimes, setTotalTimes ] = useState(startingTotalTimes)
 
 
   const [ selectedFlight, setSelectedFlight ] = useState(null)
@@ -29,9 +33,34 @@ const LogbookPage = () => {
     const response = await superagent.get(`http://${window.location.hostname}:8081/log`)
     const logData = JSON.parse(response.text)
 
+    // Flight hours this month and year
+    const today = moment()
+    const thisMonth = today.format('MMMM')
+    const thisYear = today.format('YYYY')
+    const month = logData.logs.filter(log => moment(log.date).format('MMMM') === thisMonth).reduce((acc, log) => acc + log.total, 0)
+    const year = logData.logs.filter(log => moment(log.date).format('YYYY') === thisYear).reduce((acc, log) => acc + log.total, 0)
+
+
+    // Calc Totals
+    const totalTimes = {
+      ...logData.logs.reduce((acc, log) => ({
+        takeoffs: acc.takeoffs + log.takeoffs,
+        landings: acc.landings + log.landings,
+        night: acc.night + log.night,
+        simInstrument: acc.simInstrument + log.simInstrument,
+        crossCountry: acc.crossCountry + log.crossCountry,
+        dual: acc.dual + log.dual,
+        pic: acc.pic + log.pic,
+        total: acc.total + log.total,
+      }), startingTotalTimes),
+      month,
+      year,
+    }
+
+
     setLoaded(true)
     setLogs(logData.logs)
-    setTotalTimes(logData.totals)
+    setTotalTimes(totalTimes)
     setSelectedFlight(logData.logs[0].id)
   }
 
