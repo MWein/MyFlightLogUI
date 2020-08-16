@@ -37,8 +37,6 @@ const BuildProjectPage = () => {
     const response = await superagent.get(`http://${window.location.hostname}:8081/build-details?buildid=${buildId}`)
     const projectData = JSON.parse(response.text)
 
-    console.log(JSON.stringify(projectData))
-
     setLoaded(true)
     setBuildProjectData(projectData)
   }
