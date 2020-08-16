@@ -46,6 +46,7 @@ const LogTable = ({ logs, selectedFlight, setSelectedFlight }) => {
 
   const [ withPhotos, setWithPhotos ] = useState(false)
   const [ withForeflighTrack, setWithForeflightTrack ] = useState(false)
+  const [ onlyFavorites, setOnlyFavorites ] = useState(false)
 
   const [ page, setPage ] = useState(0)
   const [ rowsPerPage ] = useState(10)
@@ -61,6 +62,12 @@ const LogTable = ({ logs, selectedFlight, setSelectedFlight }) => {
     setPage(0)
     setSelectedFlight(null)
     setWithForeflightTrack(event.target.checked)
+  }
+
+  const handleOnlyFavoritesFilterChange = event => {
+    setPage(0)
+    setSelectedFlight(null)
+    setOnlyFavorites(event.target.checked)
   }
 
 
@@ -87,6 +94,7 @@ const LogTable = ({ logs, selectedFlight, setSelectedFlight }) => {
   const filteredSortedLogs = logs
     .filter(log => withPhotos ? log.pictures && log.pictures.length > 0 : true)
     .filter(log => withForeflighTrack ? log.hasForeflightTrack : true)
+    .filter(log => onlyFavorites ? log.favorite : true)
 
 
 
@@ -157,7 +165,6 @@ const LogTable = ({ logs, selectedFlight, setSelectedFlight }) => {
             <Checkbox
               checked={withPhotos}
               onChange={handlePhotoFilterChange}
-              name="checkedF"
               color='primary'
             />
           }
@@ -168,11 +175,20 @@ const LogTable = ({ logs, selectedFlight, setSelectedFlight }) => {
             <Checkbox
               checked={withForeflighTrack}
               onChange={handleForflightFilterChange}
-              name="checkedF"
               color='primary'
             />
           }
           label="With Foreflight Track"
+        />
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={onlyFavorites}
+              onChange={handleOnlyFavoritesFilterChange}
+              color='primary'
+            />
+          }
+          label="Favorites"
         />
       </div>
 
