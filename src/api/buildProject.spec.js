@@ -184,6 +184,7 @@ const graphMockBuildData = {
       name: 'Research',
       expenses: [
         {
+          description: 'Bought a thing',
           cost: 50,
           projected: false,
         },
@@ -210,6 +211,7 @@ const graphMockBuildData = {
       name: 'Workshop',
       expenses: [
         {
+          description: 'Bought another thing',
           cost: 50,
           projected: true,
         },
@@ -255,6 +257,46 @@ describe('createHoursGraphObject', () => {
         Object {
           "label": "Did some research",
           "value": 2,
+        },
+      ]
+    `)
+  })
+})
+
+describe('createExpensesGraphObject', () => {
+  it('All phases', () => {
+    expect(createExpensesGraphObject(graphMockBuildData, 'all'))
+      .toMatchInlineSnapshot(`
+      Array [
+        Object {
+          "label": "Research",
+          "value": 50,
+        },
+        Object {
+          "label": "Workshop",
+          "value": 0,
+        },
+        Object {
+          "color": "black",
+          "label": "Projected",
+          "value": 50,
+        },
+      ]
+    `)
+  })
+
+  it('Selected phase', () => {
+    expect(createExpensesGraphObject(graphMockBuildData, '1'))
+      .toMatchInlineSnapshot(`
+      Array [
+        Object {
+          "label": "Bought a thing",
+          "value": 50,
+        },
+        Object {
+          "color": "black",
+          "label": "Projected",
+          "value": 0,
         },
       ]
     `)
