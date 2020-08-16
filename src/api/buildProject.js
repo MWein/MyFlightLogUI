@@ -12,7 +12,9 @@ export const getEntriesFromPhase = (buildProjectData, selectedPhase) => {
 
 export const headerData = (buildProjectData, selectedPhase, currencyFormatter) => {
   const phase = buildProjectData.phases.find(x => x.id === selectedPhase)
-  const complete = selectedPhase === 'all' ? buildProjectData.phases.reduce((acc, x) => !x ? false : acc, false) : phase.complete
+
+  // If selected is 'all', add the number of falses. If its 0, the project is complete
+  const complete = selectedPhase === 'all' ? buildProjectData.phases.reduce((acc, x) => !x.complete + acc, 0) === 0 : phase.complete
 
   const entries = selectedPhase == 'all' ?
     buildProjectData.phases.reduce((acc, x) => [ ...acc, ...x.entries ], [])
@@ -34,7 +36,7 @@ export const headerData = (buildProjectData, selectedPhase, currencyFormatter) =
   if (!firstDate) {
     timeline = 'Not Started'
   } else if (complete) {
-    timeline = `${moment(firstDate).format('D MMMM YYYY')} - ${moment(lastDate).format('DD MMMM YYYY')}`
+    timeline = `${moment(firstDate).format('D MMMM YYYY')} - ${moment(lastDate).format('D MMMM YYYY')}`
   } else {
     timeline = `${moment(firstDate).format('D MMMM YYYY')} - Ongoing`
   }
