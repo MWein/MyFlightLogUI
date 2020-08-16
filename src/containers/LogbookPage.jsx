@@ -37,13 +37,13 @@ const LogbookPage = () => {
     const today = moment()
     const thisMonth = today.format('MMMM')
     const thisYear = today.format('YYYY')
-    const month = logData.logs.filter(log => moment(log.date).format('MMMM') === thisMonth).reduce((acc, log) => acc + log.total, 0)
-    const year = logData.logs.filter(log => moment(log.date).format('YYYY') === thisYear).reduce((acc, log) => acc + log.total, 0)
+    const month = logData.filter(log => moment(log.date).format('MMMM') === thisMonth).reduce((acc, log) => acc + log.total, 0)
+    const year = logData.filter(log => moment(log.date).format('YYYY') === thisYear).reduce((acc, log) => acc + log.total, 0)
 
 
     // Calc Totals
     const totalTimes = {
-      ...logData.logs.reduce((acc, log) => ({
+      ...logData.reduce((acc, log) => ({
         takeoffs: acc.takeoffs + log.takeoffs,
         landings: acc.landings + log.landings,
         night: acc.night + log.night,
@@ -59,9 +59,9 @@ const LogbookPage = () => {
 
 
     setLoaded(true)
-    setLogs(logData.logs)
+    setLogs(logData)
     setTotalTimes(totalTimes)
-    setSelectedFlight(logData.logs[0].id)
+    setSelectedFlight(logData[0].id)
   }
 
 
