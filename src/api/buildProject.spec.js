@@ -175,3 +175,88 @@ describe('headerData', () => {
     `)
   })
 })
+
+const graphMockBuildData = {
+  name: 'Yes',
+  phases: [
+    {
+      id: '1',
+      name: 'Research',
+      expenses: [
+        {
+          cost: 50,
+          projected: false,
+        },
+      ],
+      entries: [
+        {
+          title: 'Did some research',
+          date: '2020-01-01',
+          minutes: 120,
+          rivets: 20,
+          phase: 'Research',
+        },
+        {
+          title: 'Did some more research',
+          date: '2020-01-01',
+          minutes: 60,
+          rivets: 20,
+          phase: 'Research',
+        },
+      ],
+    },
+    {
+      id: '2',
+      name: 'Workshop',
+      expenses: [
+        {
+          cost: 50,
+          projected: true,
+        },
+      ],
+      entries: [
+        {
+          title: 'Did something with the workshop',
+          date: '2020-01-03',
+          minutes: 120,
+          rivets: 20,
+          phase: 'Workshop',
+        },
+      ],
+    },
+  ],
+}
+
+describe('createHoursGraphObject', () => {
+  it('All phases', () => {
+    expect(createHoursGraphObject(graphMockBuildData, 'all'))
+      .toMatchInlineSnapshot(`
+      Array [
+        Object {
+          "label": "Research",
+          "value": 3,
+        },
+        Object {
+          "label": "Workshop",
+          "value": 2,
+        },
+      ]
+    `)
+  })
+
+  it('Selected phase', () => {
+    expect(createHoursGraphObject(graphMockBuildData, '1'))
+      .toMatchInlineSnapshot(`
+      Array [
+        Object {
+          "label": "Did some more research",
+          "value": 1,
+        },
+        Object {
+          "label": "Did some research",
+          "value": 2,
+        },
+      ]
+    `)
+  })
+})
