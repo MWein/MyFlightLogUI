@@ -62,6 +62,11 @@ const LogbookPage = () => {
     setLogs(logData)
     setTotalTimes(totalTimes)
     setSelectedFlight(logData[0].id)
+    if (logData[0].hasForeflightTrack) {
+      const response = await superagent.get(`http://${window.location.hostname}:8081/foreflight-track?flightid=${logData[0].id}`)
+      const track = JSON.parse(response.text)
+      setForeflightTrack(track)
+    }
   }
 
 
@@ -88,7 +93,6 @@ const LogbookPage = () => {
       if (selectedFlightObj.hasForeflightTrack) {
         const response = await superagent.get(`http://${window.location.hostname}:8081/foreflight-track?flightid=${flightId}`)
         const track = JSON.parse(response.text)
-
         setForeflightTrack(track)
       } else {
         setForeflightTrack([])
