@@ -62,7 +62,7 @@ export const createHoursGraphObject = (buildProjectData, selectedPhase) => {
   if (selectedPhase === 'all') {
     return buildProjectData.phases.map(x => x.name).map(phase => ({
       label: phase,
-      value: entries.filter(x => x.phase === phase).reduce((acc, x) => acc + x.minutes, 0) / 60
+      value: Number((entries.filter(x => x.phase === phase).reduce((acc, x) => acc + x.minutes, 0) / 60).toFixed(2))
     })
     )
   }

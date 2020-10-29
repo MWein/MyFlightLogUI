@@ -32,7 +32,6 @@ const BuildProjectPage = () => {
   const hoursGraphObject = createHoursGraphObject(buildProjectData, selectedPhase)
   const expensesGraphObject = createExpensesGraphObject(buildProjectData, selectedPhase)
 
-
   const getBuildDetails = async () => {
     const response = await superagent.get(`http://${window.location.hostname}:8081/build-details?buildid=${buildId}`)
     const projectData = JSON.parse(response.text)
