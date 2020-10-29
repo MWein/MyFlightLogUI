@@ -37,7 +37,7 @@ const LogbookPage = () => {
     const today = moment()
     const thisMonth = today.format('MMMM')
     const thisYear = today.format('YYYY')
-    const month = logData.filter(log => moment(log.date).format('MMMM') === thisMonth).reduce((acc, log) => acc + log.total, 0)
+    const month = logData.filter(log => moment(log.date).format('MMMM') === thisMonth && moment(log.date).format('YYYY') === thisYear).reduce((acc, log) => acc + log.total, 0)
     const year = logData.filter(log => moment(log.date).format('YYYY') === thisYear).reduce((acc, log) => acc + log.total, 0)
 
 
