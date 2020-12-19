@@ -110,9 +110,13 @@ const LogTable = ({ logs, selectedFlight, setSelectedFlight }) => {
               <StyledTableCell align="left" width='1px'>From</StyledTableCell>
               <StyledTableCell align="left" width='1px'></StyledTableCell>
               <StyledTableCell align="left" width='1px'>To</StyledTableCell>
+              <StyledTableCell align="left" width='15px'>Instr</StyledTableCell>
+              <StyledTableCell align="left" width='15px'>Hood</StyledTableCell>
+              <StyledTableCell align="left" width='15px'>Approaches</StyledTableCell>
               <StyledTableCell align="left" width='15px'>Night</StyledTableCell>
-              <StyledTableCell align="left" width='95px'>Cross Country</StyledTableCell>
+              <StyledTableCell align="left" width='15px'>XC</StyledTableCell>
               <StyledTableCell align="left" width='15px'>PIC</StyledTableCell>
+              <StyledTableCell align="left" width='15px'>Dual</StyledTableCell>
               <StyledTableCell align="left" width='15px'>Total</StyledTableCell>
               <StyledTableCell align="left">Remarks</StyledTableCell>
             </TableRow>
@@ -138,9 +142,13 @@ const LogTable = ({ logs, selectedFlight, setSelectedFlight }) => {
                     </div>
                   </StyledTableCell>
 
+                  <StyledTableCell align="left">{formatHours(row.instrument)}</StyledTableCell>
+                  <StyledTableCell align="left">{formatHours(row.simInstrument)}</StyledTableCell>
+                  <StyledTableCell align="left">{formatHours(row.instrumentApproaches)}</StyledTableCell>
                   <StyledTableCell align="left">{formatHours(row.night)}</StyledTableCell>
                   <StyledTableCell align="left">{formatHours(row.crossCountry)}</StyledTableCell>
                   <StyledTableCell align="left">{formatHours(row.pic)}</StyledTableCell>
+                  <StyledTableCell align="left">{formatHours(row.dual)}</StyledTableCell>
                   <StyledTableCell align="left">{formatHours(row.total)}</StyledTableCell>
                   <StyledTableCell align="left">{row.remarks}</StyledTableCell>
                 </StyledTableRow>
