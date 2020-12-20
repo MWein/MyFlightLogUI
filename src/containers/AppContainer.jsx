@@ -3,6 +3,7 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import VisitedAirports from './VisitedAirports'
 import LogbookPage from './LogbookPage'
 import BuildLogDir from './BuildLogDir'
+import FlightCurrencyPage from './FlightCurrencyPage'
 
 import NavBar from '../components/NavBar'
 
@@ -16,6 +17,7 @@ const AppContainer = () => {
         <Route component={LogbookPage} exact path='/' />
         <Route component={VisitedAirports} path='/airports' />
         <Route component={BuildLogDir} path='/buildlog' />
+        <Route component={FlightCurrencyPage} path='/currency' />
       </Container>
     </BrowserRouter>
   )
