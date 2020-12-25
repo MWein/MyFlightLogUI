@@ -109,7 +109,7 @@ const BuildProjectPage = () => {
 
         {entries.map(entry => {
           return (
-            <Paper key={JSON.stringify(entry)} style={{ marginTop: '15px', padding: '15px' }}>
+            <Paper key={JSON.stringify(entry)} style={{ marginTop: '15px', marginBottom: '15px', padding: '15px' }}>
               <div style={{ display: 'flex', position: 'relative' }}>
                 <Typography variant='h6' style={{ width: '150px' }}>
                   {`${moment(entry.date).format('MMM DD, YYYY')}`}
@@ -127,9 +127,15 @@ const BuildProjectPage = () => {
 
               <Divider style={{ marginTop: '10px', marginBottom: '10px' }} />
 
-              <Typography>
+              <Typography style={{ marginBottom: entry.pictures.length === 0 ? '0px' : '15px' }}>
                 {entry.description}
               </Typography>
+
+              {entry.pictures.map(imgId => (
+                <span key={imgId} style={{ width: '100%', height: '200px', alignItems: 'left', justifyContent: 'left', marginRight: '15px', marginTop: '15px' }}>
+                  <img src={`http://${window.location.hostname}:8081/build-photo?imgid=${imgId}`} style={{ maxWidth: '90%', maxHeight: '180px', borderRadius: '4px' }} />
+                </span>
+              ))}
 
             </Paper>
           )
