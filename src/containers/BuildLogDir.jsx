@@ -14,7 +14,7 @@ const ProjectCard = (id, name, hours, lastEntry, onClick = () => {}) => {
   return (
     <Paper key={id} onClick={onClick} style={{ position: 'relative', width: '300px', height: '265px', margin: '7px', cursor: 'pointer' }}>
       <div style={{ width: '100%', height: '200px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <img src={`http://${window.location.hostname}:8081/build-cover?imgid=${id}`} style={{ maxWidth: '90%', maxHeight: '180px', borderRadius: '4px' }} />
+        <img src={`http://${window.location.hostname}:8081/img?id=${id}`} style={{ maxWidth: '90%', maxHeight: '180px', borderRadius: '4px' }} />
       </div>
 
       <div style={{ position: 'relative', width: '100%', background: 'red' }}>

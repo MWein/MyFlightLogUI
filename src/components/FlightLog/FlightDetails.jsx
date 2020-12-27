@@ -42,7 +42,8 @@ const FlightDetails = ({ foreflightTrack, geoLocation, planePic, pictures }) => 
 
 
   const initiateModal = (selection, images) => {
-    setModalImages(images)
+    // Replace all the modal image URLs with copies, without thumbnail, to display fullsize images
+    setModalImages(images.map(image => image.replace('thumb=true', '')))
     setSelectedImg(selection)
     setDisplayModal(true)
   }

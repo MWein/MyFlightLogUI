@@ -133,7 +133,7 @@ const BuildProjectPage = () => {
 
               {entry.pictures.map(imgId => (
                 <span key={imgId} style={{ width: '100%', height: '200px', alignItems: 'left', justifyContent: 'left', marginRight: '15px', marginTop: '15px' }}>
-                  <img src={`http://${window.location.hostname}:8081/build-photo?imgid=${imgId}`} style={{ maxWidth: '90%', maxHeight: '180px', borderRadius: '4px' }} />
+                  <img src={`http://${window.location.hostname}:8081/img?id=${imgId}&thumb=true`} style={{ maxWidth: '90%', maxHeight: '180px', borderRadius: '4px' }} />
                 </span>
               ))}
 
