@@ -110,9 +110,9 @@ const LogbookPage = () => {
 
 
   const geoLocation = selectedFlight != null ? logs.find(x => x.id === selectedFlight).geolocation : []
-  const planePic = selectedFlight != null ? `http://${window.location.hostname}:8081/plane-image?ident=${logs.find(x => x.id === selectedFlight).ident}` : null
+  const planePic = selectedFlight != null ? `http://${window.location.hostname}:8081/img?id=${logs.find(x => x.id === selectedFlight).ident}&thumb=true` : null
   const pictureIds = selectedFlight != null ? logs.find(x => x.id === selectedFlight).pictures: []
-  const pictures = pictureIds.map(x => `http://${window.location.hostname}:8081/flight-image?imgid=${x}`)
+  const pictures = pictureIds.map(x => `http://${window.location.hostname}:8081/img?id=${x}&thumb=true`)
 
   return (
     <div>
